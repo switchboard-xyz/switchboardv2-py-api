@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>switchboard.oraclequeue API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>switchboard.oraclequeue</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from dataclasses import dataclass
+from decimal import Decimal
+from solana.publickey import PublicKey
+
+from switchboard.common import AccountParams
+
+# Parameters for initializing OracleQueueAccount
+@dataclass
+class OracleQueueInitParams:
+
+    &#34;&#34;&#34;Rewards to provide oracles and round openers on this queue.&#34;&#34;&#34;
+    reward: Decimal
+
+    &#34;&#34;&#34;The minimum amount of stake oracles must present to remain on the queue.&#34;&#34;&#34;
+    min_stake: Decimal
+
+    &#34;&#34;&#34;
+    The account to delegate authority to for creating permissions targeted
+    at the queue.
+    &#34;&#34;&#34;
+    authority: PublicKey 
+
+    &#34;&#34;&#34;Time period we should remove an oracle after if no response.&#34;&#34;&#34;
+    oracle_timeout: int = None
+
+    &#34;&#34;&#34;
+    The tolerated variance amount oracle results can have from the
+    accepted round result before being slashed.
+    slashBound = varianceToleranceMultiplier * stdDeviation
+    Default: 2
+    &#34;&#34;&#34;
+    variance_tolerance_multiplier: float = None
+
+    &#34;&#34;&#34;Consecutive failure limit for a feed before feed permission is revoked.&#34;&#34;&#34;
+    consecutive_feed_failure_limit: int = None
+
+    &#34;&#34;&#34;
+    TODO: implement
+    Consecutive failure limit for an oracle before oracle permission is revoked.
+    &#34;&#34;&#34;
+    consecutive_oracle_failure_limit: int = None
+
+    &#34;&#34;&#34;the minimum update delay time for Aggregators&#34;&#34;&#34;
+    minimum_delay_seconds: int = None
+
+    &#34;&#34;&#34;Optionally set the size of the queue.&#34;&#34;&#34;
+    queue_size: int = None
+
+    &#34;&#34;&#34;
+    Enabling this setting means data feeds do not need explicit permission
+    to join the queue.
+    &#34;&#34;&#34;
+    unpermissioned_feeds: bool = None
+
+    &#34;&#34;&#34;Whether slashing is enabled on this queue&#34;&#34;&#34;
+    slashing_enabled: bool = None
+
+    &#34;&#34;&#34;
+    After a feed lease is funded or re-funded, it must consecutively succeed
+    N amount of times or its authorization to use the queue is auto-revoked.
+    &#34;&#34;&#34;
+    feed_probation_period: int = None
+
+    &#34;&#34;&#34;A name to assign to this OracleQueue.&#34;&#34;&#34;
+    name: bytes = None
+
+    &#34;&#34;&#34;Buffer for queue metadata.&#34;&#34;&#34;
+    metadata: bytes = None
+
+class OracleQueueAccount:
+    &#34;&#34;&#34;A Switchboard account representing a queue for distributing oracles to
+    permitted data feeds.
+
+    Attributes:
+        program (anchor.Program): The anchor program ref
+        public_key (PublicKey | None): This OracleQueueAccount&#39;s public key
+        keypair (Keypair | None): this OracleQueueAccount&#39;s keypair
+    &#34;&#34;&#34;
+
+    def __init__(self, params: AccountParams):
+        if params.pubkey is None and params.keypair is None:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        self.program = params.program
+        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.keypair = params.keypair
+
+    &#34;&#34;&#34;
+    Get the size of an OracleQueueAccount on chain
+
+    Args:
+
+    Returns:
+        int: size of the OracleQueueAccount type on chain
+    &#34;&#34;&#34;
+    def size(self):
+        return self.program.account[&#34;OracleQueueAccountData&#34;].size
+
+    &#34;&#34;&#34;
+    Load and parse OracleQueueAccount data based on the program IDL
+
+    Args:
+    
+    Returns:
+        OracleQueueAccount
+
+    Raises:
+        AccountDoesNotExistError: If the account doesn&#39;t exist.
+        AccountInvalidDiscriminator: If the discriminator doesn&#39;t match the IDL.
+    &#34;&#34;&#34;
+    async def load_data(self):
+        queue = await self.program.account[&#34;OracleQueueAccountData&#34;].fetch(self.public_key)
+        queue.ebuf = None
+        return queue</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="switchboard.oraclequeue.OracleQueueAccount"><code class="flex name class">
+<span>class <span class="ident">OracleQueueAccount</span></span>
+<span>(</span><span>params: <a title="switchboard.common.AccountParams" href="common.html#switchboard.common.AccountParams">AccountParams</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A Switchboard account representing a queue for distributing oracles to
+permitted data feeds.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>program</code></strong> :&ensp;<code>anchor.Program</code></dt>
+<dd>The anchor program ref</dd>
+</dl>
+<p>public_key (PublicKey | None): This OracleQueueAccount's public key
+keypair (Keypair | None): this OracleQueueAccount's keypair</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class OracleQueueAccount:
+    &#34;&#34;&#34;A Switchboard account representing a queue for distributing oracles to
+    permitted data feeds.
+
+    Attributes:
+        program (anchor.Program): The anchor program ref
+        public_key (PublicKey | None): This OracleQueueAccount&#39;s public key
+        keypair (Keypair | None): this OracleQueueAccount&#39;s keypair
+    &#34;&#34;&#34;
+
+    def __init__(self, params: AccountParams):
+        if params.pubkey is None and params.keypair is None:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        self.program = params.program
+        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.keypair = params.keypair
+
+    &#34;&#34;&#34;
+    Get the size of an OracleQueueAccount on chain
+
+    Args:
+
+    Returns:
+        int: size of the OracleQueueAccount type on chain
+    &#34;&#34;&#34;
+    def size(self):
+        return self.program.account[&#34;OracleQueueAccountData&#34;].size
+
+    &#34;&#34;&#34;
+    Load and parse OracleQueueAccount data based on the program IDL
+
+    Args:
+    
+    Returns:
+        OracleQueueAccount
+
+    Raises:
+        AccountDoesNotExistError: If the account doesn&#39;t exist.
+        AccountInvalidDiscriminator: If the discriminator doesn&#39;t match the IDL.
+    &#34;&#34;&#34;
+    async def load_data(self):
+        queue = await self.program.account[&#34;OracleQueueAccountData&#34;].fetch(self.public_key)
+        queue.ebuf = None
+        return queue</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="switchboard.oraclequeue.OracleQueueAccount.load_data"><code class="name flex">
+<span>async def <span class="ident">load_data</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def load_data(self):
+    queue = await self.program.account[&#34;OracleQueueAccountData&#34;].fetch(self.public_key)
+    queue.ebuf = None
+    return queue</code></pre>
+</details>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueAccount.size"><code class="name flex">
+<span>def <span class="ident">size</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def size(self):
+    return self.program.account[&#34;OracleQueueAccountData&#34;].size</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams"><code class="flex name class">
+<span>class <span class="ident">OracleQueueInitParams</span></span>
+<span>(</span><span>reward: decimal.Decimal, min_stake: decimal.Decimal, authority: solana.publickey.PublicKey, oracle_timeout: int = None, variance_tolerance_multiplier: float = None, consecutive_feed_failure_limit: int = None, consecutive_oracle_failure_limit: int = None, minimum_delay_seconds: int = None, queue_size: int = None, unpermissioned_feeds: bool = None, slashing_enabled: bool = None, feed_probation_period: int = None, name: bytes = None, metadata: bytes = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rewards to provide oracles and round openers on this queue.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class OracleQueueInitParams:
+
+    &#34;&#34;&#34;Rewards to provide oracles and round openers on this queue.&#34;&#34;&#34;
+    reward: Decimal
+
+    &#34;&#34;&#34;The minimum amount of stake oracles must present to remain on the queue.&#34;&#34;&#34;
+    min_stake: Decimal
+
+    &#34;&#34;&#34;
+    The account to delegate authority to for creating permissions targeted
+    at the queue.
+    &#34;&#34;&#34;
+    authority: PublicKey 
+
+    &#34;&#34;&#34;Time period we should remove an oracle after if no response.&#34;&#34;&#34;
+    oracle_timeout: int = None
+
+    &#34;&#34;&#34;
+    The tolerated variance amount oracle results can have from the
+    accepted round result before being slashed.
+    slashBound = varianceToleranceMultiplier * stdDeviation
+    Default: 2
+    &#34;&#34;&#34;
+    variance_tolerance_multiplier: float = None
+
+    &#34;&#34;&#34;Consecutive failure limit for a feed before feed permission is revoked.&#34;&#34;&#34;
+    consecutive_feed_failure_limit: int = None
+
+    &#34;&#34;&#34;
+    TODO: implement
+    Consecutive failure limit for an oracle before oracle permission is revoked.
+    &#34;&#34;&#34;
+    consecutive_oracle_failure_limit: int = None
+
+    &#34;&#34;&#34;the minimum update delay time for Aggregators&#34;&#34;&#34;
+    minimum_delay_seconds: int = None
+
+    &#34;&#34;&#34;Optionally set the size of the queue.&#34;&#34;&#34;
+    queue_size: int = None
+
+    &#34;&#34;&#34;
+    Enabling this setting means data feeds do not need explicit permission
+    to join the queue.
+    &#34;&#34;&#34;
+    unpermissioned_feeds: bool = None
+
+    &#34;&#34;&#34;Whether slashing is enabled on this queue&#34;&#34;&#34;
+    slashing_enabled: bool = None
+
+    &#34;&#34;&#34;
+    After a feed lease is funded or re-funded, it must consecutively succeed
+    N amount of times or its authorization to use the queue is auto-revoked.
+    &#34;&#34;&#34;
+    feed_probation_period: int = None
+
+    &#34;&#34;&#34;A name to assign to this OracleQueue.&#34;&#34;&#34;
+    name: bytes = None
+
+    &#34;&#34;&#34;Buffer for queue metadata.&#34;&#34;&#34;
+    metadata: bytes = None</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.authority"><code class="name">var <span class="ident">authority</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>Time period we should remove an oracle after if no response.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.consecutive_feed_failure_limit"><code class="name">var <span class="ident">consecutive_feed_failure_limit</span> : int</code></dt>
+<dd>
+<div class="desc"><p>TODO: implement
+Consecutive failure limit for an oracle before oracle permission is revoked.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.consecutive_oracle_failure_limit"><code class="name">var <span class="ident">consecutive_oracle_failure_limit</span> : int</code></dt>
+<dd>
+<div class="desc"><p>the minimum update delay time for Aggregators</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.feed_probation_period"><code class="name">var <span class="ident">feed_probation_period</span> : int</code></dt>
+<dd>
+<div class="desc"><p>A name to assign to this OracleQueue.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.metadata"><code class="name">var <span class="ident">metadata</span> : bytes</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.min_stake"><code class="name">var <span class="ident">min_stake</span> : decimal.Decimal</code></dt>
+<dd>
+<div class="desc"><p>The account to delegate authority to for creating permissions targeted
+at the queue.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.minimum_delay_seconds"><code class="name">var <span class="ident">minimum_delay_seconds</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Optionally set the size of the queue.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.name"><code class="name">var <span class="ident">name</span> : bytes</code></dt>
+<dd>
+<div class="desc"><p>Buffer for queue metadata.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.oracle_timeout"><code class="name">var <span class="ident">oracle_timeout</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The tolerated variance amount oracle results can have from the
+accepted round result before being slashed.
+slashBound = varianceToleranceMultiplier * stdDeviation
+Default: 2</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.queue_size"><code class="name">var <span class="ident">queue_size</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Enabling this setting means data feeds do not need explicit permission
+to join the queue.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.reward"><code class="name">var <span class="ident">reward</span> : decimal.Decimal</code></dt>
+<dd>
+<div class="desc"><p>The minimum amount of stake oracles must present to remain on the queue.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.slashing_enabled"><code class="name">var <span class="ident">slashing_enabled</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>After a feed lease is funded or re-funded, it must consecutively succeed
+N amount of times or its authorization to use the queue is auto-revoked.</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.unpermissioned_feeds"><code class="name">var <span class="ident">unpermissioned_feeds</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Whether slashing is enabled on this queue</p></div>
+</dd>
+<dt id="switchboard.oraclequeue.OracleQueueInitParams.variance_tolerance_multiplier"><code class="name">var <span class="ident">variance_tolerance_multiplier</span> : float</code></dt>
+<dd>
+<div class="desc"><p>Consecutive failure limit for a feed before feed permission is revoked.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="switchboard" href="index.html">switchboard</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="switchboard.oraclequeue.OracleQueueAccount" href="#switchboard.oraclequeue.OracleQueueAccount">OracleQueueAccount</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.oraclequeue.OracleQueueAccount.load_data" href="#switchboard.oraclequeue.OracleQueueAccount.load_data">load_data</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueAccount.size" href="#switchboard.oraclequeue.OracleQueueAccount.size">size</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.oraclequeue.OracleQueueInitParams" href="#switchboard.oraclequeue.OracleQueueInitParams">OracleQueueInitParams</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.authority" href="#switchboard.oraclequeue.OracleQueueInitParams.authority">authority</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.consecutive_feed_failure_limit" href="#switchboard.oraclequeue.OracleQueueInitParams.consecutive_feed_failure_limit">consecutive_feed_failure_limit</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.consecutive_oracle_failure_limit" href="#switchboard.oraclequeue.OracleQueueInitParams.consecutive_oracle_failure_limit">consecutive_oracle_failure_limit</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.feed_probation_period" href="#switchboard.oraclequeue.OracleQueueInitParams.feed_probation_period">feed_probation_period</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.metadata" href="#switchboard.oraclequeue.OracleQueueInitParams.metadata">metadata</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.min_stake" href="#switchboard.oraclequeue.OracleQueueInitParams.min_stake">min_stake</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.minimum_delay_seconds" href="#switchboard.oraclequeue.OracleQueueInitParams.minimum_delay_seconds">minimum_delay_seconds</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.name" href="#switchboard.oraclequeue.OracleQueueInitParams.name">name</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.oracle_timeout" href="#switchboard.oraclequeue.OracleQueueInitParams.oracle_timeout">oracle_timeout</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.queue_size" href="#switchboard.oraclequeue.OracleQueueInitParams.queue_size">queue_size</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.reward" href="#switchboard.oraclequeue.OracleQueueInitParams.reward">reward</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.slashing_enabled" href="#switchboard.oraclequeue.OracleQueueInitParams.slashing_enabled">slashing_enabled</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.unpermissioned_feeds" href="#switchboard.oraclequeue.OracleQueueInitParams.unpermissioned_feeds">unpermissioned_feeds</a></code></li>
+<li><code><a title="switchboard.oraclequeue.OracleQueueInitParams.variance_tolerance_multiplier" href="#switchboard.oraclequeue.OracleQueueInitParams.variance_tolerance_multiplier">variance_tolerance_multiplier</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>switchboard.crank API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>switchboard.crank</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import anchorpy
+
+from dataclasses import dataclass
+from typing import Any
+
+from solana.publickey import PublicKey
+from switchboard.common import AccountParams
+from switchboard.oraclequeue import OracleQueueAccount
+from switchboard.aggregator import AggregatorAccount
+
+# Parameters for initializing a CrankAccount
+@dataclass
+class CrankInitParams:
+
+    &#34;&#34;&#34;OracleQueueAccount for which this crank is associated&#34;&#34;&#34;
+    queue_account: OracleQueueAccount
+
+    &#34;&#34;&#34;Buffer specifying crank name&#34;&#34;&#34;
+    names: bytes = None
+
+    &#34;&#34;&#34;Buffer specifying crank metadata&#34;&#34;&#34;
+    metadata: bytes = None
+
+    &#34;&#34;&#34;Optional max number of rows&#34;&#34;&#34;
+    max_rows: int = None
+
+# Parameters for popping an element from a CrankAccount
+@dataclass
+class CrankPopParams:
+
+    &#34;&#34;&#34;Specifies the wallet to reward for turning the crank.&#34;&#34;&#34;
+    payout_wallet: PublicKey
+
+    &#34;&#34;&#34;The pubkey of the linked oracle queue.&#34;&#34;&#34;
+    queue_pubkey: PublicKey
+
+    &#34;&#34;&#34;The pubkey of the linked oracle queue authority.&#34;&#34;&#34;
+    queue_authority: PublicKey
+
+    &#34;&#34;&#34;CrankAccount data&#34;&#34;&#34;
+    crank: Any
+
+    &#34;&#34;&#34;QueueAccount data&#34;&#34;&#34;
+    queue: Any
+
+    &#34;&#34;&#34;Token mint pubkey&#34;&#34;&#34;
+    token_mint: PublicKey
+
+    &#34;&#34;&#34;
+    Array of pubkeys to attempt to pop. If discluded, this will be loaded
+    from the crank upon calling.
+    &#34;&#34;&#34;
+    ready_pubkeys: list[PublicKey] = None
+
+    &#34;&#34;&#34;Nonce to allow consecutive crank pops with the same blockhash.&#34;&#34;&#34;
+    nonce: int = None
+    fail_open_on_mismatch: bool = None
+
+# Parameters for pushing an element into a CrankAccount
+@dataclass
+class CrankPushParams:
+    aggregator_account: AggregatorAccount
+
+# Row structure of elements in the crank
+@dataclass
+class CrankRow:
+
+    &#34;&#34;&#34;Aggregator account pubkey&#34;&#34;&#34;
+    pubkey: PublicKey
+
+    &#34;&#34;&#34;Next aggregator update timestamp to order the crank by&#34;&#34;&#34;
+    next_timestamp: int
+
+    @staticmethod
+    def from_bytes(buf: bytes):
+        pass
+
+class CrankAccount:
+    &#34;&#34;&#34; A Switchboard account representing a crank of aggregators ordered by next update time.
+
+    Attributes:
+        program (anchor.Program): The anchor program ref
+        public_key (PublicKey | None): This crank&#39;s public key
+        keypair (Keypair | None): this crank&#39;s keypair
+    &#34;&#34;&#34;
+
+
+    def __init__(self, params: AccountParams):
+        if params.pubkey is None and params.keypair is None:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        self.program = params.program
+        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.keypair = params.keypair
+    
+    &#34;&#34;&#34;
+    Get the size of an CrankAccount on chain
+
+    Args:
+
+    Returns:
+        int: size of the CrankAccount type on chain
+    &#34;&#34;&#34;
+    def size(self):
+        return self.program.account[&#34;CrankAccountData&#34;].size
+
+    &#34;&#34;&#34;
+    Load and parse CrankAccount data based on the program IDL
+
+    Args:
+    
+    Returns:
+        CrankAccount
+
+    Raises:
+        AccountDoesNotExistError: If the account doesn&#39;t exist.
+        AccountInvalidDiscriminator: If the discriminator doesn&#39;t match the IDL.
+    &#34;&#34;&#34;
+    async def load_data(self):
+        crank = await self.program.account[&#34;CrankAccountData&#34;].fetch(self.public_key)
+        crank.ebuf = None
+        return crank
+
+    &#34;&#34;&#34;
+    Create and initialize the CrankAccount.
+
+    Args:
+        program (anchor.Program): Switchboard program representation holding connection and IDL.
+        params (CrankInitParams)
+    
+    Returns:
+        CrankAccount
+    &#34;&#34;&#34;
+    # TODO: imlement fn
+    async def create(program: anchorpy.Program, params: Any):
+        pass
+
+    &#34;&#34;&#34;
+    Pushes a new aggregator onto the crank
+    
+    Args:
+        aggregator (CrankPushParams)
+    
+    Returns:
+        TransactionSignature
+    &#34;&#34;&#34;
+    async def push(params: Any):
+        pass
+    
+    &#34;&#34;&#34;
+    Pops a tx from the crank.
+
+    Args:
+        params (CrankPopParams)
+
+    Returns:
+        TransactionSignature    
+    &#34;&#34;&#34;
+    async def pop_txn(params: Any):
+        pass
+
+    &#34;&#34;&#34;
+    Pops an aggregator from the crank
+
+    Args:
+        params (CrankPopParams)
+    
+    Returns:
+        TransactionSignature
+    &#34;&#34;&#34;
+    async def pop(params: Any):
+        pass
+    
+    &#34;&#34;&#34;
+    Get an array of the next aggregator pubkeys to be popped from the crank, limited by n
+
+    Args:
+        n (int): limit of pubkeys to return
+
+    Returns:
+        list[CrankRow]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next_with_time(n: int):
+        pass
+
+    &#34;&#34;&#34;
+    Get an array of the next readily updateable aggregator pubkeys to be popped
+    from the crank, limited by n
+
+    Args:
+        n (Optional[int]): limit of pubkeys to return
+
+    Returns:
+        list[PublicKey]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next_ready(n: int):
+        pass
+
+    &#34;&#34;&#34;
+    Get an array of the next aggregator pubkeys to be popped from the crank, limited by n
+
+    Args:
+        n (int): limit of pubkeys to return
+
+    Returns:
+        list[PublicKey]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next(n: int):
+        pass</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="switchboard.crank.CrankAccount"><code class="flex name class">
+<span>class <span class="ident">CrankAccount</span></span>
+<span>(</span><span>params: <a title="switchboard.common.AccountParams" href="common.html#switchboard.common.AccountParams">AccountParams</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A Switchboard account representing a crank of aggregators ordered by next update time.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>program</code></strong> :&ensp;<code>anchor.Program</code></dt>
+<dd>The anchor program ref</dd>
+</dl>
+<p>public_key (PublicKey | None): This crank's public key
+keypair (Keypair | None): this crank's keypair</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CrankAccount:
+    &#34;&#34;&#34; A Switchboard account representing a crank of aggregators ordered by next update time.
+
+    Attributes:
+        program (anchor.Program): The anchor program ref
+        public_key (PublicKey | None): This crank&#39;s public key
+        keypair (Keypair | None): this crank&#39;s keypair
+    &#34;&#34;&#34;
+
+
+    def __init__(self, params: AccountParams):
+        if params.pubkey is None and params.keypair is None:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+            raise ValueError(&#39;User must provide either a publicKey or keypair for account use.&#39;)
+        self.program = params.program
+        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.keypair = params.keypair
+    
+    &#34;&#34;&#34;
+    Get the size of an CrankAccount on chain
+
+    Args:
+
+    Returns:
+        int: size of the CrankAccount type on chain
+    &#34;&#34;&#34;
+    def size(self):
+        return self.program.account[&#34;CrankAccountData&#34;].size
+
+    &#34;&#34;&#34;
+    Load and parse CrankAccount data based on the program IDL
+
+    Args:
+    
+    Returns:
+        CrankAccount
+
+    Raises:
+        AccountDoesNotExistError: If the account doesn&#39;t exist.
+        AccountInvalidDiscriminator: If the discriminator doesn&#39;t match the IDL.
+    &#34;&#34;&#34;
+    async def load_data(self):
+        crank = await self.program.account[&#34;CrankAccountData&#34;].fetch(self.public_key)
+        crank.ebuf = None
+        return crank
+
+    &#34;&#34;&#34;
+    Create and initialize the CrankAccount.
+
+    Args:
+        program (anchor.Program): Switchboard program representation holding connection and IDL.
+        params (CrankInitParams)
+    
+    Returns:
+        CrankAccount
+    &#34;&#34;&#34;
+    # TODO: imlement fn
+    async def create(program: anchorpy.Program, params: Any):
+        pass
+
+    &#34;&#34;&#34;
+    Pushes a new aggregator onto the crank
+    
+    Args:
+        aggregator (CrankPushParams)
+    
+    Returns:
+        TransactionSignature
+    &#34;&#34;&#34;
+    async def push(params: Any):
+        pass
+    
+    &#34;&#34;&#34;
+    Pops a tx from the crank.
+
+    Args:
+        params (CrankPopParams)
+
+    Returns:
+        TransactionSignature    
+    &#34;&#34;&#34;
+    async def pop_txn(params: Any):
+        pass
+
+    &#34;&#34;&#34;
+    Pops an aggregator from the crank
+
+    Args:
+        params (CrankPopParams)
+    
+    Returns:
+        TransactionSignature
+    &#34;&#34;&#34;
+    async def pop(params: Any):
+        pass
+    
+    &#34;&#34;&#34;
+    Get an array of the next aggregator pubkeys to be popped from the crank, limited by n
+
+    Args:
+        n (int): limit of pubkeys to return
+
+    Returns:
+        list[CrankRow]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next_with_time(n: int):
+        pass
+
+    &#34;&#34;&#34;
+    Get an array of the next readily updateable aggregator pubkeys to be popped
+    from the crank, limited by n
+
+    Args:
+        n (Optional[int]): limit of pubkeys to return
+
+    Returns:
+        list[PublicKey]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next_ready(n: int):
+        pass
+
+    &#34;&#34;&#34;
+    Get an array of the next aggregator pubkeys to be popped from the crank, limited by n
+
+    Args:
+        n (int): limit of pubkeys to return
+
+    Returns:
+        list[PublicKey]: Pubkey list of Aggregators and next timestamp to be popped, ordered by timestamp
+    &#34;&#34;&#34;
+    async def peak_next(n: int):
+        pass</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="switchboard.crank.CrankAccount.create"><code class="name flex">
+<span>async def <span class="ident">create</span></span>(<span>program: anchorpy.program.core.Program, params: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def create(program: anchorpy.Program, params: Any):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.load_data"><code class="name flex">
+<span>async def <span class="ident">load_data</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def load_data(self):
+    crank = await self.program.account[&#34;CrankAccountData&#34;].fetch(self.public_key)
+    crank.ebuf = None
+    return crank</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.peak_next"><code class="name flex">
+<span>async def <span class="ident">peak_next</span></span>(<span>n: int)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def peak_next(n: int):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.peak_next_ready"><code class="name flex">
+<span>async def <span class="ident">peak_next_ready</span></span>(<span>n: int)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def peak_next_ready(n: int):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.peak_next_with_time"><code class="name flex">
+<span>async def <span class="ident">peak_next_with_time</span></span>(<span>n: int)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def peak_next_with_time(n: int):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.pop"><code class="name flex">
+<span>async def <span class="ident">pop</span></span>(<span>params: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def pop(params: Any):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.pop_txn"><code class="name flex">
+<span>async def <span class="ident">pop_txn</span></span>(<span>params: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def pop_txn(params: Any):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.push"><code class="name flex">
+<span>async def <span class="ident">push</span></span>(<span>params: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">async def push(params: Any):
+    pass</code></pre>
+</details>
+</dd>
+<dt id="switchboard.crank.CrankAccount.size"><code class="name flex">
+<span>def <span class="ident">size</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def size(self):
+    return self.program.account[&#34;CrankAccountData&#34;].size</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.crank.CrankInitParams"><code class="flex name class">
+<span>class <span class="ident">CrankInitParams</span></span>
+<span>(</span><span>queue_account: <a title="switchboard.oraclequeue.OracleQueueAccount" href="oraclequeue.html#switchboard.oraclequeue.OracleQueueAccount">OracleQueueAccount</a>, names: bytes = None, metadata: bytes = None, max_rows: int = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>OracleQueueAccount for which this crank is associated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class CrankInitParams:
+
+    &#34;&#34;&#34;OracleQueueAccount for which this crank is associated&#34;&#34;&#34;
+    queue_account: OracleQueueAccount
+
+    &#34;&#34;&#34;Buffer specifying crank name&#34;&#34;&#34;
+    names: bytes = None
+
+    &#34;&#34;&#34;Buffer specifying crank metadata&#34;&#34;&#34;
+    metadata: bytes = None
+
+    &#34;&#34;&#34;Optional max number of rows&#34;&#34;&#34;
+    max_rows: int = None</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.crank.CrankInitParams.max_rows"><code class="name">var <span class="ident">max_rows</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.crank.CrankInitParams.metadata"><code class="name">var <span class="ident">metadata</span> : bytes</code></dt>
+<dd>
+<div class="desc"><p>Optional max number of rows</p></div>
+</dd>
+<dt id="switchboard.crank.CrankInitParams.names"><code class="name">var <span class="ident">names</span> : bytes</code></dt>
+<dd>
+<div class="desc"><p>Buffer specifying crank metadata</p></div>
+</dd>
+<dt id="switchboard.crank.CrankInitParams.queue_account"><code class="name">var <span class="ident">queue_account</span> : <a title="switchboard.oraclequeue.OracleQueueAccount" href="oraclequeue.html#switchboard.oraclequeue.OracleQueueAccount">OracleQueueAccount</a></code></dt>
+<dd>
+<div class="desc"><p>Buffer specifying crank name</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.crank.CrankPopParams"><code class="flex name class">
+<span>class <span class="ident">CrankPopParams</span></span>
+<span>(</span><span>payout_wallet: solana.publickey.PublicKey, queue_pubkey: solana.publickey.PublicKey, queue_authority: solana.publickey.PublicKey, crank: Any, queue: Any, token_mint: solana.publickey.PublicKey, ready_pubkeys: list = None, nonce: int = None, fail_open_on_mismatch: bool = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Specifies the wallet to reward for turning the crank.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class CrankPopParams:
+
+    &#34;&#34;&#34;Specifies the wallet to reward for turning the crank.&#34;&#34;&#34;
+    payout_wallet: PublicKey
+
+    &#34;&#34;&#34;The pubkey of the linked oracle queue.&#34;&#34;&#34;
+    queue_pubkey: PublicKey
+
+    &#34;&#34;&#34;The pubkey of the linked oracle queue authority.&#34;&#34;&#34;
+    queue_authority: PublicKey
+
+    &#34;&#34;&#34;CrankAccount data&#34;&#34;&#34;
+    crank: Any
+
+    &#34;&#34;&#34;QueueAccount data&#34;&#34;&#34;
+    queue: Any
+
+    &#34;&#34;&#34;Token mint pubkey&#34;&#34;&#34;
+    token_mint: PublicKey
+
+    &#34;&#34;&#34;
+    Array of pubkeys to attempt to pop. If discluded, this will be loaded
+    from the crank upon calling.
+    &#34;&#34;&#34;
+    ready_pubkeys: list[PublicKey] = None
+
+    &#34;&#34;&#34;Nonce to allow consecutive crank pops with the same blockhash.&#34;&#34;&#34;
+    nonce: int = None
+    fail_open_on_mismatch: bool = None</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.crank.CrankPopParams.crank"><code class="name">var <span class="ident">crank</span> : Any</code></dt>
+<dd>
+<div class="desc"><p>QueueAccount data</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.fail_open_on_mismatch"><code class="name">var <span class="ident">fail_open_on_mismatch</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.nonce"><code class="name">var <span class="ident">nonce</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.payout_wallet"><code class="name">var <span class="ident">payout_wallet</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>The pubkey of the linked oracle queue.</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.queue"><code class="name">var <span class="ident">queue</span> : Any</code></dt>
+<dd>
+<div class="desc"><p>Token mint pubkey</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.queue_authority"><code class="name">var <span class="ident">queue_authority</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>CrankAccount data</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.queue_pubkey"><code class="name">var <span class="ident">queue_pubkey</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>The pubkey of the linked oracle queue authority.</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.ready_pubkeys"><code class="name">var <span class="ident">ready_pubkeys</span> : list</code></dt>
+<dd>
+<div class="desc"><p>Nonce to allow consecutive crank pops with the same blockhash.</p></div>
+</dd>
+<dt id="switchboard.crank.CrankPopParams.token_mint"><code class="name">var <span class="ident">token_mint</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>Array of pubkeys to attempt to pop. If discluded, this will be loaded
+from the crank upon calling.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.crank.CrankPushParams"><code class="flex name class">
+<span>class <span class="ident">CrankPushParams</span></span>
+<span>(</span><span>aggregator_account: <a title="switchboard.aggregator.AggregatorAccount" href="aggregator.html#switchboard.aggregator.AggregatorAccount">AggregatorAccount</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>CrankPushParams(aggregator_account: switchboard.aggregator.AggregatorAccount)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class CrankPushParams:
+    aggregator_account: AggregatorAccount</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.crank.CrankPushParams.aggregator_account"><code class="name">var <span class="ident">aggregator_account</span> : <a title="switchboard.aggregator.AggregatorAccount" href="aggregator.html#switchboard.aggregator.AggregatorAccount">AggregatorAccount</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.crank.CrankRow"><code class="flex name class">
+<span>class <span class="ident">CrankRow</span></span>
+<span>(</span><span>pubkey: solana.publickey.PublicKey, next_timestamp: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Aggregator account pubkey</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class CrankRow:
+
+    &#34;&#34;&#34;Aggregator account pubkey&#34;&#34;&#34;
+    pubkey: PublicKey
+
+    &#34;&#34;&#34;Next aggregator update timestamp to order the crank by&#34;&#34;&#34;
+    next_timestamp: int
+
+    @staticmethod
+    def from_bytes(buf: bytes):
+        pass</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.crank.CrankRow.next_timestamp"><code class="name">var <span class="ident">next_timestamp</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.crank.CrankRow.pubkey"><code class="name">var <span class="ident">pubkey</span> : solana.publickey.PublicKey</code></dt>
+<dd>
+<div class="desc"><p>Next aggregator update timestamp to order the crank by</p></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="switchboard.crank.CrankRow.from_bytes"><code class="name flex">
+<span>def <span class="ident">from_bytes</span></span>(<span>buf: bytes)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def from_bytes(buf: bytes):
+    pass</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="switchboard" href="index.html">switchboard</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="switchboard.crank.CrankAccount" href="#switchboard.crank.CrankAccount">CrankAccount</a></code></h4>
+<ul class="two-column">
+<li><code><a title="switchboard.crank.CrankAccount.create" href="#switchboard.crank.CrankAccount.create">create</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.load_data" href="#switchboard.crank.CrankAccount.load_data">load_data</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.peak_next" href="#switchboard.crank.CrankAccount.peak_next">peak_next</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.peak_next_ready" href="#switchboard.crank.CrankAccount.peak_next_ready">peak_next_ready</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.peak_next_with_time" href="#switchboard.crank.CrankAccount.peak_next_with_time">peak_next_with_time</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.pop" href="#switchboard.crank.CrankAccount.pop">pop</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.pop_txn" href="#switchboard.crank.CrankAccount.pop_txn">pop_txn</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.push" href="#switchboard.crank.CrankAccount.push">push</a></code></li>
+<li><code><a title="switchboard.crank.CrankAccount.size" href="#switchboard.crank.CrankAccount.size">size</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.crank.CrankInitParams" href="#switchboard.crank.CrankInitParams">CrankInitParams</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.crank.CrankInitParams.max_rows" href="#switchboard.crank.CrankInitParams.max_rows">max_rows</a></code></li>
+<li><code><a title="switchboard.crank.CrankInitParams.metadata" href="#switchboard.crank.CrankInitParams.metadata">metadata</a></code></li>
+<li><code><a title="switchboard.crank.CrankInitParams.names" href="#switchboard.crank.CrankInitParams.names">names</a></code></li>
+<li><code><a title="switchboard.crank.CrankInitParams.queue_account" href="#switchboard.crank.CrankInitParams.queue_account">queue_account</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.crank.CrankPopParams" href="#switchboard.crank.CrankPopParams">CrankPopParams</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.crank.CrankPopParams.crank" href="#switchboard.crank.CrankPopParams.crank">crank</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.fail_open_on_mismatch" href="#switchboard.crank.CrankPopParams.fail_open_on_mismatch">fail_open_on_mismatch</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.nonce" href="#switchboard.crank.CrankPopParams.nonce">nonce</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.payout_wallet" href="#switchboard.crank.CrankPopParams.payout_wallet">payout_wallet</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.queue" href="#switchboard.crank.CrankPopParams.queue">queue</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.queue_authority" href="#switchboard.crank.CrankPopParams.queue_authority">queue_authority</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.queue_pubkey" href="#switchboard.crank.CrankPopParams.queue_pubkey">queue_pubkey</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.ready_pubkeys" href="#switchboard.crank.CrankPopParams.ready_pubkeys">ready_pubkeys</a></code></li>
+<li><code><a title="switchboard.crank.CrankPopParams.token_mint" href="#switchboard.crank.CrankPopParams.token_mint">token_mint</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.crank.CrankPushParams" href="#switchboard.crank.CrankPushParams">CrankPushParams</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.crank.CrankPushParams.aggregator_account" href="#switchboard.crank.CrankPushParams.aggregator_account">aggregator_account</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.crank.CrankRow" href="#switchboard.crank.CrankRow">CrankRow</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.crank.CrankRow.from_bytes" href="#switchboard.crank.CrankRow.from_bytes">from_bytes</a></code></li>
+<li><code><a title="switchboard.crank.CrankRow.next_timestamp" href="#switchboard.crank.CrankRow.next_timestamp">next_timestamp</a></code></li>
+<li><code><a title="switchboard.crank.CrankRow.pubkey" href="#switchboard.crank.CrankRow.pubkey">pubkey</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

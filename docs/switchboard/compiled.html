@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>switchboard.compiled API documentation</title>
+<meta name="description" content="Generated protocol buffer code." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>switchboard.compiled</code></h1>
+</header>
+<section id="section-intro">
+<p>Generated protocol buffer code.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: job_schemas.proto
+&#34;&#34;&#34;Generated protocol buffer code.&#34;&#34;&#34;
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import message as _message
+from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b&#39;\n\x11job_schemas.proto\&#34;\xf7\x14\n\tOracleJob\x12\x1e\n\x05tasks\x18\x01 \x03(\x0b\x32\x0f.OracleJob.Task\x1a\xe2\x01\n\x08HttpTask\x12\x0b\n\x03url\x18\x01 \x01(\t\x12*\n\x06method\x18\x02 \x01(\x0e\x32\x1a.OracleJob.HttpTask.Method\x12+\n\x07headers\x18\x03 \x03(\x0b\x32\x1a.OracleJob.HttpTask.Header\x12\x0c\n\x04\x62ody\x18\x04 \x01(\t\x1a$\n\x06Header\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\&#34;&lt;\n\x06Method\x12\x11\n\rMETHOD_UNKOWN\x10\x00\x12\x0e\n\nMETHOD_GET\x10\x01\x12\x0f\n\x0bMETHOD_POST\x10\x02\x1a\x9f\x01\n\rJsonParseTask\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x46\n\x12\x61ggregation_method\x18\x02 \x01(\x0e\x32*.OracleJob.JsonParseTask.AggregationMethod\&#34;8\n\x11\x41ggregationMethod\x12\x08\n\x04NONE\x10\x00\x12\x07\n\x03MIN\x10\x01\x12\x07\n\x03MAX\x10\x02\x12\x07\n\x03SUM\x10\x03\x1a\x46\n\nMedianTask\x12\x1e\n\x05tasks\x18\x01 \x03(\x0b\x32\x0f.OracleJob.Task\x12\x18\n\x04jobs\x18\x02 \x03(\x0b\x32\n.OracleJob\x1a\x44\n\x08MeanTask\x12\x1e\n\x05tasks\x18\x01 \x03(\x0b\x32\x0f.OracleJob.Task\x12\x18\n\x04jobs\x18\x02 \x03(\x0b\x32\n.OracleJob\x1a\x43\n\x07MaxTask\x12\x1e\n\x05tasks\x18\x01 \x03(\x0b\x32\x0f.OracleJob.Task\x12\x18\n\x04jobs\x18\x02 \x03(\x0b\x32\n.OracleJob\x1a\x1a\n\tValueTask\x12\r\n\x05value\x18\x01 \x01(\x01\x1a`\n\rWebsocketTask\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x14\n\x0csubscription\x18\x02 \x01(\t\x12\x1c\n\x14max_data_age_seconds\x18\x03 \x01(\x05\x12\x0e\n\x06\x66ilter\x18\x04 \x01(\t\x1aX\n\x0f\x43onditionalTask\x12 \n\x07\x61ttempt\x18\x01 \x03(\x0b\x32\x0f.OracleJob.Task\x12#\n\non_failure\x18\x02 \x03(\x0b\x32\x0f.OracleJob.Task\x1a\x65\n\nDivideTask\x12\x10\n\x06scalar\x18\x01 \x01(\x01H\x00\x12\x1b\n\x11\x61ggregator_pubkey\x18\x02 \x01(\tH\x00\x12\x19\n\x03job\x18\x03 \x01(\x0b\x32\n.OracleJobH\x00\x42\r\n\x0b\x44\x65nominator\x1a\x64\n\x0cMultiplyTask\x12\x10\n\x06scalar\x18\x01 \x01(\x01H\x00\x12\x1b\n\x11\x61ggregator_pubkey\x18\x02 \x01(\tH\x00\x12\x19\n\x03job\x18\x03 \x01(\x0b\x32\n.OracleJobH\x00\x42\n\n\x08Multiple\x1a_\n\x07\x41\x64\x64Task\x12\x10\n\x06scalar\x18\x01 \x01(\x01H\x00\x12\x1b\n\x11\x61ggregator_pubkey\x18\x02 \x01(\tH\x00\x12\x19\n\x03job\x18\x03 \x01(\x0b\x32\n.OracleJobH\x00\x42\n\n\x08\x41\x64\x64ition\x1ag\n\x0cSubtractTask\x12\x10\n\x06scalar\x18\x01 \x01(\x01H\x00\x12\x1b\n\x11\x61ggregator_pubkey\x18\x02 \x01(\tH\x00\x12\x19\n\x03job\x18\x03 \x01(\x0b\x32\n.OracleJobH\x00\x42\r\n\x0bSubtraction\x1a~\n\x10LpTokenPriceTask\x12 \n\x16mercurial_pool_address\x18\x01 \x01(\tH\x00\x12\x1c\n\x12saber_pool_address\x18\x02 \x01(\tH\x00\x12\x1b\n\x11orca_pool_address\x18\x03 \x01(\tH\x00\x42\r\n\x0bPoolAddress\x1a\xc0\x01\n\x12LpExchangeRateTask\x12\x18\n\x10in_token_address\x18\x01 \x01(\t\x12\x19\n\x11out_token_address\x18\x02 \x01(\t\x12 \n\x16mercurial_pool_address\x18\x03 \x01(\tH\x00\x12\x1c\n\x12saber_pool_address\x18\x04 \x01(\tH\x00\x12&amp;\n\x1corca_pool_token_mint_address\x18\x05 \x01(\tH\x00\x42\r\n\x0bPoolAddress\x1a\x39\n\x10RegexExtractTask\x12\x0f\n\x07pattern\x18\x01 \x01(\t\x12\x14\n\x0cgroup_number\x18\x02 \x01(\x05\x1a\x10\n\x0eXStepPriceTask\x1a\x35\n\x08TwapTask\x12\x19\n\x11\x61ggregator_pubkey\x18\x01 \x01(\t\x12\x0e\n\x06period\x18\x02 \x01(\x05\x1a+\n\rSerumSwapTask\x12\x1a\n\x12serum_pool_address\x18\x01 \x01(\t\x1a\x8c\x07\n\x04Task\x12(\n\thttp_task\x18\x01 \x01(\x0b\x32\x13.OracleJob.HttpTaskH\x00\x12\x33\n\x0fjson_parse_task\x18\x02 \x01(\x0b\x32\x18.OracleJob.JsonParseTaskH\x00\x12,\n\x0bmedian_task\x18\x04 \x01(\x0b\x32\x15.OracleJob.MedianTaskH\x00\x12(\n\tmean_task\x18\x05 \x01(\x0b\x32\x13.OracleJob.MeanTaskH\x00\x12\x32\n\x0ewebsocket_task\x18\x06 \x01(\x0b\x32\x18.OracleJob.WebsocketTaskH\x00\x12,\n\x0b\x64ivide_task\x18\x07 \x01(\x0b\x32\x15.OracleJob.DivideTaskH\x00\x12\x30\n\rmultiply_task\x18\x08 \x01(\x0b\x32\x17.OracleJob.MultiplyTaskH\x00\x12:\n\x13lp_token_price_task\x18\t \x01(\x0b\x32\x1b.OracleJob.LpTokenPriceTaskH\x00\x12&gt;\n\x15lp_exchange_rate_task\x18\n \x01(\x0b\x32\x1d.OracleJob.LpExchangeRateTaskH\x00\x12\x36\n\x10\x63onditional_task\x18\x0b \x01(\x0b\x32\x1a.OracleJob.ConditionalTaskH\x00\x12*\n\nvalue_task\x18\x0c \x01(\x0b\x32\x14.OracleJob.ValueTaskH\x00\x12&amp;\n\x08max_task\x18\r \x01(\x0b\x32\x12.OracleJob.MaxTaskH\x00\x12\x39\n\x12regex_extract_task\x18\x0e \x01(\x0b\x32\x1b.OracleJob.RegexExtractTaskH\x00\x12\x35\n\x10xstep_price_task\x18\x0f \x01(\x0b\x32\x19.OracleJob.XStepPriceTaskH\x00\x12&amp;\n\x08\x61\x64\x64_task\x18\x10 \x01(\x0b\x32\x12.OracleJob.AddTaskH\x00\x12\x30\n\rsubtract_task\x18\x11 \x01(\x0b\x32\x17.OracleJob.SubtractTaskH\x00\x12(\n\ttwap_task\x18\x12 \x01(\x0b\x32\x13.OracleJob.TwapTaskH\x00\x12\x33\n\x0fserum_swap_task\x18\x13 \x01(\x0b\x32\x18.OracleJob.SerumSwapTaskH\x00\x42\x06\n\x04Task\&#34;Q\n\nJobPosting\x12\x1f\n\x17\x61ggregator_state_pubkey\x18\x01 \x01(\x0c\x12\x14\n\x0cnode_pubkeys\x18\x02 \x03(\x0c\x12\x0c\n\x04slot\x18\x03 \x01(\x04\&#34;Q\n\tJobResult\x12\x13\n\x0bnode_pubkey\x18\x02 \x01(\x0c\x12\x0e\n\x06result\x18\x03 \x01(\x01\x12\r\n\x05\x65rror\x18\x04 \x01(\x08J\x04\x08\x01\x10\x02J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07&#39;)
+
+
+
+_ORACLEJOB = DESCRIPTOR.message_types_by_name[&#39;OracleJob&#39;]
+_ORACLEJOB_HTTPTASK = _ORACLEJOB.nested_types_by_name[&#39;HttpTask&#39;]
+_ORACLEJOB_HTTPTASK_HEADER = _ORACLEJOB_HTTPTASK.nested_types_by_name[&#39;Header&#39;]
+_ORACLEJOB_JSONPARSETASK = _ORACLEJOB.nested_types_by_name[&#39;JsonParseTask&#39;]
+_ORACLEJOB_MEDIANTASK = _ORACLEJOB.nested_types_by_name[&#39;MedianTask&#39;]
+_ORACLEJOB_MEANTASK = _ORACLEJOB.nested_types_by_name[&#39;MeanTask&#39;]
+_ORACLEJOB_MAXTASK = _ORACLEJOB.nested_types_by_name[&#39;MaxTask&#39;]
+_ORACLEJOB_VALUETASK = _ORACLEJOB.nested_types_by_name[&#39;ValueTask&#39;]
+_ORACLEJOB_WEBSOCKETTASK = _ORACLEJOB.nested_types_by_name[&#39;WebsocketTask&#39;]
+_ORACLEJOB_CONDITIONALTASK = _ORACLEJOB.nested_types_by_name[&#39;ConditionalTask&#39;]
+_ORACLEJOB_DIVIDETASK = _ORACLEJOB.nested_types_by_name[&#39;DivideTask&#39;]
+_ORACLEJOB_MULTIPLYTASK = _ORACLEJOB.nested_types_by_name[&#39;MultiplyTask&#39;]
+_ORACLEJOB_ADDTASK = _ORACLEJOB.nested_types_by_name[&#39;AddTask&#39;]
+_ORACLEJOB_SUBTRACTTASK = _ORACLEJOB.nested_types_by_name[&#39;SubtractTask&#39;]
+_ORACLEJOB_LPTOKENPRICETASK = _ORACLEJOB.nested_types_by_name[&#39;LpTokenPriceTask&#39;]
+_ORACLEJOB_LPEXCHANGERATETASK = _ORACLEJOB.nested_types_by_name[&#39;LpExchangeRateTask&#39;]
+_ORACLEJOB_REGEXEXTRACTTASK = _ORACLEJOB.nested_types_by_name[&#39;RegexExtractTask&#39;]
+_ORACLEJOB_XSTEPPRICETASK = _ORACLEJOB.nested_types_by_name[&#39;XStepPriceTask&#39;]
+_ORACLEJOB_TWAPTASK = _ORACLEJOB.nested_types_by_name[&#39;TwapTask&#39;]
+_ORACLEJOB_SERUMSWAPTASK = _ORACLEJOB.nested_types_by_name[&#39;SerumSwapTask&#39;]
+_ORACLEJOB_TASK = _ORACLEJOB.nested_types_by_name[&#39;Task&#39;]
+_JOBPOSTING = DESCRIPTOR.message_types_by_name[&#39;JobPosting&#39;]
+_JOBRESULT = DESCRIPTOR.message_types_by_name[&#39;JobResult&#39;]
+_ORACLEJOB_HTTPTASK_METHOD = _ORACLEJOB_HTTPTASK.enum_types_by_name[&#39;Method&#39;]
+_ORACLEJOB_JSONPARSETASK_AGGREGATIONMETHOD = _ORACLEJOB_JSONPARSETASK.enum_types_by_name[&#39;AggregationMethod&#39;]
+OracleJob = _reflection.GeneratedProtocolMessageType(&#39;OracleJob&#39;, (_message.Message,), {
+
+  &#39;HttpTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;HttpTask&#39;, (_message.Message,), {
+
+    &#39;Header&#39; : _reflection.GeneratedProtocolMessageType(&#39;Header&#39;, (_message.Message,), {
+      &#39;DESCRIPTOR&#39; : _ORACLEJOB_HTTPTASK_HEADER,
+      &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+      # @@protoc_insertion_point(class_scope:OracleJob.HttpTask.Header)
+      })
+    ,
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_HTTPTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.HttpTask)
+    })
+  ,
+
+  &#39;JsonParseTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;JsonParseTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_JSONPARSETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.JsonParseTask)
+    })
+  ,
+
+  &#39;MedianTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;MedianTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_MEDIANTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.MedianTask)
+    })
+  ,
+
+  &#39;MeanTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;MeanTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_MEANTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.MeanTask)
+    })
+  ,
+
+  &#39;MaxTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;MaxTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_MAXTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.MaxTask)
+    })
+  ,
+
+  &#39;ValueTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;ValueTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_VALUETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.ValueTask)
+    })
+  ,
+
+  &#39;WebsocketTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;WebsocketTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_WEBSOCKETTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.WebsocketTask)
+    })
+  ,
+
+  &#39;ConditionalTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;ConditionalTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_CONDITIONALTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.ConditionalTask)
+    })
+  ,
+
+  &#39;DivideTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;DivideTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_DIVIDETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.DivideTask)
+    })
+  ,
+
+  &#39;MultiplyTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;MultiplyTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_MULTIPLYTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.MultiplyTask)
+    })
+  ,
+
+  &#39;AddTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;AddTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_ADDTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.AddTask)
+    })
+  ,
+
+  &#39;SubtractTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;SubtractTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_SUBTRACTTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.SubtractTask)
+    })
+  ,
+
+  &#39;LpTokenPriceTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;LpTokenPriceTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_LPTOKENPRICETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.LpTokenPriceTask)
+    })
+  ,
+
+  &#39;LpExchangeRateTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;LpExchangeRateTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_LPEXCHANGERATETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.LpExchangeRateTask)
+    })
+  ,
+
+  &#39;RegexExtractTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;RegexExtractTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_REGEXEXTRACTTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.RegexExtractTask)
+    })
+  ,
+
+  &#39;XStepPriceTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;XStepPriceTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_XSTEPPRICETASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.XStepPriceTask)
+    })
+  ,
+
+  &#39;TwapTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;TwapTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_TWAPTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.TwapTask)
+    })
+  ,
+
+  &#39;SerumSwapTask&#39; : _reflection.GeneratedProtocolMessageType(&#39;SerumSwapTask&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_SERUMSWAPTASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.SerumSwapTask)
+    })
+  ,
+
+  &#39;Task&#39; : _reflection.GeneratedProtocolMessageType(&#39;Task&#39;, (_message.Message,), {
+    &#39;DESCRIPTOR&#39; : _ORACLEJOB_TASK,
+    &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+    # @@protoc_insertion_point(class_scope:OracleJob.Task)
+    })
+  ,
+  &#39;DESCRIPTOR&#39; : _ORACLEJOB,
+  &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+  # @@protoc_insertion_point(class_scope:OracleJob)
+  })
+_sym_db.RegisterMessage(OracleJob)
+_sym_db.RegisterMessage(OracleJob.HttpTask)
+_sym_db.RegisterMessage(OracleJob.HttpTask.Header)
+_sym_db.RegisterMessage(OracleJob.JsonParseTask)
+_sym_db.RegisterMessage(OracleJob.MedianTask)
+_sym_db.RegisterMessage(OracleJob.MeanTask)
+_sym_db.RegisterMessage(OracleJob.MaxTask)
+_sym_db.RegisterMessage(OracleJob.ValueTask)
+_sym_db.RegisterMessage(OracleJob.WebsocketTask)
+_sym_db.RegisterMessage(OracleJob.ConditionalTask)
+_sym_db.RegisterMessage(OracleJob.DivideTask)
+_sym_db.RegisterMessage(OracleJob.MultiplyTask)
+_sym_db.RegisterMessage(OracleJob.AddTask)
+_sym_db.RegisterMessage(OracleJob.SubtractTask)
+_sym_db.RegisterMessage(OracleJob.LpTokenPriceTask)
+_sym_db.RegisterMessage(OracleJob.LpExchangeRateTask)
+_sym_db.RegisterMessage(OracleJob.RegexExtractTask)
+_sym_db.RegisterMessage(OracleJob.XStepPriceTask)
+_sym_db.RegisterMessage(OracleJob.TwapTask)
+_sym_db.RegisterMessage(OracleJob.SerumSwapTask)
+_sym_db.RegisterMessage(OracleJob.Task)
+
+JobPosting = _reflection.GeneratedProtocolMessageType(&#39;JobPosting&#39;, (_message.Message,), {
+  &#39;DESCRIPTOR&#39; : _JOBPOSTING,
+  &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+  # @@protoc_insertion_point(class_scope:JobPosting)
+  })
+_sym_db.RegisterMessage(JobPosting)
+
+JobResult = _reflection.GeneratedProtocolMessageType(&#39;JobResult&#39;, (_message.Message,), {
+  &#39;DESCRIPTOR&#39; : _JOBRESULT,
+  &#39;__module__&#39; : &#39;job_schemas_pb2&#39;
+  # @@protoc_insertion_point(class_scope:JobResult)
+  })
+_sym_db.RegisterMessage(JobResult)
+
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  _ORACLEJOB._serialized_start=22
+  _ORACLEJOB._serialized_end=2701
+  _ORACLEJOB_HTTPTASK._serialized_start=68
+  _ORACLEJOB_HTTPTASK._serialized_end=294
+  _ORACLEJOB_HTTPTASK_HEADER._serialized_start=196
+  _ORACLEJOB_HTTPTASK_HEADER._serialized_end=232
+  _ORACLEJOB_HTTPTASK_METHOD._serialized_start=234
+  _ORACLEJOB_HTTPTASK_METHOD._serialized_end=294
+  _ORACLEJOB_JSONPARSETASK._serialized_start=297
+  _ORACLEJOB_JSONPARSETASK._serialized_end=456
+  _ORACLEJOB_JSONPARSETASK_AGGREGATIONMETHOD._serialized_start=400
+  _ORACLEJOB_JSONPARSETASK_AGGREGATIONMETHOD._serialized_end=456
+  _ORACLEJOB_MEDIANTASK._serialized_start=458
+  _ORACLEJOB_MEDIANTASK._serialized_end=528
+  _ORACLEJOB_MEANTASK._serialized_start=530
+  _ORACLEJOB_MEANTASK._serialized_end=598
+  _ORACLEJOB_MAXTASK._serialized_start=600
+  _ORACLEJOB_MAXTASK._serialized_end=667
+  _ORACLEJOB_VALUETASK._serialized_start=669
+  _ORACLEJOB_VALUETASK._serialized_end=695
+  _ORACLEJOB_WEBSOCKETTASK._serialized_start=697
+  _ORACLEJOB_WEBSOCKETTASK._serialized_end=793
+  _ORACLEJOB_CONDITIONALTASK._serialized_start=795
+  _ORACLEJOB_CONDITIONALTASK._serialized_end=883
+  _ORACLEJOB_DIVIDETASK._serialized_start=885
+  _ORACLEJOB_DIVIDETASK._serialized_end=986
+  _ORACLEJOB_MULTIPLYTASK._serialized_start=988
+  _ORACLEJOB_MULTIPLYTASK._serialized_end=1088
+  _ORACLEJOB_ADDTASK._serialized_start=1090
+  _ORACLEJOB_ADDTASK._serialized_end=1185
+  _ORACLEJOB_SUBTRACTTASK._serialized_start=1187
+  _ORACLEJOB_SUBTRACTTASK._serialized_end=1290
+  _ORACLEJOB_LPTOKENPRICETASK._serialized_start=1292
+  _ORACLEJOB_LPTOKENPRICETASK._serialized_end=1418
+  _ORACLEJOB_LPEXCHANGERATETASK._serialized_start=1421
+  _ORACLEJOB_LPEXCHANGERATETASK._serialized_end=1613
+  _ORACLEJOB_REGEXEXTRACTTASK._serialized_start=1615
+  _ORACLEJOB_REGEXEXTRACTTASK._serialized_end=1672
+  _ORACLEJOB_XSTEPPRICETASK._serialized_start=1674
+  _ORACLEJOB_XSTEPPRICETASK._serialized_end=1690
+  _ORACLEJOB_TWAPTASK._serialized_start=1692
+  _ORACLEJOB_TWAPTASK._serialized_end=1745
+  _ORACLEJOB_SERUMSWAPTASK._serialized_start=1747
+  _ORACLEJOB_SERUMSWAPTASK._serialized_end=1790
+  _ORACLEJOB_TASK._serialized_start=1793
+  _ORACLEJOB_TASK._serialized_end=2701
+  _JOBPOSTING._serialized_start=2703
+  _JOBPOSTING._serialized_end=2784
+  _JOBRESULT._serialized_start=2786
+  _JOBRESULT._serialized_end=2867
+# @@protoc_insertion_point(module_scope)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="switchboard.compiled.JobPosting"><code class="flex name class">
+<span>class <span class="ident">JobPosting</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>google.protobuf.pyext._message.CMessage</li>
+<li>google.protobuf.message.Message</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.compiled.JobPosting.DESCRIPTOR"><code class="name">var <span class="ident">DESCRIPTOR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="switchboard.compiled.JobPosting.aggregator_state_pubkey"><code class="name">var <span class="ident">aggregator_state_pubkey</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobPosting.aggregator_state_pubkey</p></div>
+</dd>
+<dt id="switchboard.compiled.JobPosting.node_pubkeys"><code class="name">var <span class="ident">node_pubkeys</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobPosting.node_pubkeys</p></div>
+</dd>
+<dt id="switchboard.compiled.JobPosting.slot"><code class="name">var <span class="ident">slot</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobPosting.slot</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.compiled.JobResult"><code class="flex name class">
+<span>class <span class="ident">JobResult</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>google.protobuf.pyext._message.CMessage</li>
+<li>google.protobuf.message.Message</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.compiled.JobResult.DESCRIPTOR"><code class="name">var <span class="ident">DESCRIPTOR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="switchboard.compiled.JobResult.error"><code class="name">var <span class="ident">error</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobResult.error</p></div>
+</dd>
+<dt id="switchboard.compiled.JobResult.node_pubkey"><code class="name">var <span class="ident">node_pubkey</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobResult.node_pubkey</p></div>
+</dd>
+<dt id="switchboard.compiled.JobResult.result"><code class="name">var <span class="ident">result</span></code></dt>
+<dd>
+<div class="desc"><p>Field JobResult.result</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="switchboard.compiled.OracleJob"><code class="flex name class">
+<span>class <span class="ident">OracleJob</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>google.protobuf.pyext._message.CMessage</li>
+<li>google.protobuf.message.Message</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="switchboard.compiled.OracleJob.AddTask"><code class="name">var <span class="ident">AddTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.ConditionalTask"><code class="name">var <span class="ident">ConditionalTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.DESCRIPTOR"><code class="name">var <span class="ident">DESCRIPTOR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.DivideTask"><code class="name">var <span class="ident">DivideTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.HttpTask"><code class="name">var <span class="ident">HttpTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.JsonParseTask"><code class="name">var <span class="ident">JsonParseTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.LpExchangeRateTask"><code class="name">var <span class="ident">LpExchangeRateTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.LpTokenPriceTask"><code class="name">var <span class="ident">LpTokenPriceTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.MaxTask"><code class="name">var <span class="ident">MaxTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.MeanTask"><code class="name">var <span class="ident">MeanTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.MedianTask"><code class="name">var <span class="ident">MedianTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.MultiplyTask"><code class="name">var <span class="ident">MultiplyTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.RegexExtractTask"><code class="name">var <span class="ident">RegexExtractTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.SerumSwapTask"><code class="name">var <span class="ident">SerumSwapTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.SubtractTask"><code class="name">var <span class="ident">SubtractTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.Task"><code class="name">var <span class="ident">Task</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.TwapTask"><code class="name">var <span class="ident">TwapTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.ValueTask"><code class="name">var <span class="ident">ValueTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.WebsocketTask"><code class="name">var <span class="ident">WebsocketTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+<dt id="switchboard.compiled.OracleJob.XStepPriceTask"><code class="name">var <span class="ident">XStepPriceTask</span></code></dt>
+<dd>
+<div class="desc"><p>A ProtocolMessage</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="switchboard.compiled.OracleJob.tasks"><code class="name">var <span class="ident">tasks</span></code></dt>
+<dd>
+<div class="desc"><p>Field OracleJob.tasks</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="switchboard" href="index.html">switchboard</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="switchboard.compiled.JobPosting" href="#switchboard.compiled.JobPosting">JobPosting</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.compiled.JobPosting.DESCRIPTOR" href="#switchboard.compiled.JobPosting.DESCRIPTOR">DESCRIPTOR</a></code></li>
+<li><code><a title="switchboard.compiled.JobPosting.aggregator_state_pubkey" href="#switchboard.compiled.JobPosting.aggregator_state_pubkey">aggregator_state_pubkey</a></code></li>
+<li><code><a title="switchboard.compiled.JobPosting.node_pubkeys" href="#switchboard.compiled.JobPosting.node_pubkeys">node_pubkeys</a></code></li>
+<li><code><a title="switchboard.compiled.JobPosting.slot" href="#switchboard.compiled.JobPosting.slot">slot</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.compiled.JobResult" href="#switchboard.compiled.JobResult">JobResult</a></code></h4>
+<ul class="">
+<li><code><a title="switchboard.compiled.JobResult.DESCRIPTOR" href="#switchboard.compiled.JobResult.DESCRIPTOR">DESCRIPTOR</a></code></li>
+<li><code><a title="switchboard.compiled.JobResult.error" href="#switchboard.compiled.JobResult.error">error</a></code></li>
+<li><code><a title="switchboard.compiled.JobResult.node_pubkey" href="#switchboard.compiled.JobResult.node_pubkey">node_pubkey</a></code></li>
+<li><code><a title="switchboard.compiled.JobResult.result" href="#switchboard.compiled.JobResult.result">result</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="switchboard.compiled.OracleJob" href="#switchboard.compiled.OracleJob">OracleJob</a></code></h4>
+<ul class="two-column">
+<li><code><a title="switchboard.compiled.OracleJob.AddTask" href="#switchboard.compiled.OracleJob.AddTask">AddTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.ConditionalTask" href="#switchboard.compiled.OracleJob.ConditionalTask">ConditionalTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.DESCRIPTOR" href="#switchboard.compiled.OracleJob.DESCRIPTOR">DESCRIPTOR</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.DivideTask" href="#switchboard.compiled.OracleJob.DivideTask">DivideTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.HttpTask" href="#switchboard.compiled.OracleJob.HttpTask">HttpTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.JsonParseTask" href="#switchboard.compiled.OracleJob.JsonParseTask">JsonParseTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.LpExchangeRateTask" href="#switchboard.compiled.OracleJob.LpExchangeRateTask">LpExchangeRateTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.LpTokenPriceTask" href="#switchboard.compiled.OracleJob.LpTokenPriceTask">LpTokenPriceTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.MaxTask" href="#switchboard.compiled.OracleJob.MaxTask">MaxTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.MeanTask" href="#switchboard.compiled.OracleJob.MeanTask">MeanTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.MedianTask" href="#switchboard.compiled.OracleJob.MedianTask">MedianTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.MultiplyTask" href="#switchboard.compiled.OracleJob.MultiplyTask">MultiplyTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.RegexExtractTask" href="#switchboard.compiled.OracleJob.RegexExtractTask">RegexExtractTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.SerumSwapTask" href="#switchboard.compiled.OracleJob.SerumSwapTask">SerumSwapTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.SubtractTask" href="#switchboard.compiled.OracleJob.SubtractTask">SubtractTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.Task" href="#switchboard.compiled.OracleJob.Task">Task</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.TwapTask" href="#switchboard.compiled.OracleJob.TwapTask">TwapTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.ValueTask" href="#switchboard.compiled.OracleJob.ValueTask">ValueTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.WebsocketTask" href="#switchboard.compiled.OracleJob.WebsocketTask">WebsocketTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.XStepPriceTask" href="#switchboard.compiled.OracleJob.XStepPriceTask">XStepPriceTask</a></code></li>
+<li><code><a title="switchboard.compiled.OracleJob.tasks" href="#switchboard.compiled.OracleJob.tasks">tasks</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
