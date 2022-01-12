@@ -82,7 +82,7 @@ class JobAccount:
         AccountDoesNotExistError: If the account doesn't exist.
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
-    async def load_data(self):
+    async def load_job(self):
         job = await self.load_job()
         return OracleJob.ParseFromString(job.data)
 
@@ -107,18 +107,20 @@ class JobAccount:
 
     Args:
         program (anchor.Program)
-        prarams (JobInitParams)
+        params (JobInitParams)
 
     Returns:
         JobAccount
     """
-    async def create(self, program: anchorpy.Program, params: JobInitParams):
+    @staticmethod
+    async def create(program: anchorpy.Program, params: JobInitParams):
 
         job_account = params.keypair or Keypair.generate()
         size = 280 + params.data.length + (''.join(params.variables) if params.variables else 0)
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         state = await state_account.load_data()
-        lamports = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        lamports = response["result"]
         await program.rpc["job_init"](
             {
                 "name": params.name or bytes([0] * 32),
