@@ -475,7 +475,8 @@ class AggregatorAccount:
         size = program.account["AggregatorAccountData"].size
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         state = await state_account.load_data()
-        lamports = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        lamports = response["result"]
         await program.rpc["aggregator_init"](
             {
                 "name": aggregator_init_params.name or bytes([0] * 32),
