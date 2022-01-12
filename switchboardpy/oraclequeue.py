@@ -1,6 +1,14 @@
+import anchorpy
+
 from dataclasses import dataclass
 from decimal import Decimal
+
+from solana import system_program
+from solana import keypair
 from solana.publickey import PublicKey
+from solana.keypair import Keypair
+from solana.system_program import CreateAccountParams, create_account
+from switchboardpy.common import SwitchboardDecimal
 
 from switchboardpy.common import AccountParams
 
@@ -35,7 +43,6 @@ class OracleQueueInitParams:
     consecutive_feed_failure_limit: int = None
 
     """
-    TODO: implement
     Consecutive failure limit for an oracle before oracle permission is revoked.
     """
     consecutive_oracle_failure_limit: int = None
@@ -113,3 +120,62 @@ class OracleQueueAccount:
         queue = await self.program.account["OracleQueueAccountData"].fetch(self.public_key)
         queue.ebuf = None
         return queue
+
+    """
+    Create and initialize the OracleQueueAccount
+
+    Args:
+        program (anchor.Program)
+        params (OracleQueueInitParams)
+
+    Returns:
+        OracleQueueAccount
+    """
+    @staticmethod
+    async def create(program: anchorpy.Program, params: OracleQueueInitParams):
+        oracle_queue_account = Keypair.generate()
+        buffer = Keypair.generate()
+        queue_size = params.queue_size or 500
+        queue_size = queue_size * 32 + 8
+        response = await program.provider.connection.get_minimum_balance_for_rent_exemption(queue_size)
+        lamports = response["result"]
+        await program.rpc["oracle_queue_init"](
+            {
+                "name": params.name or bytes([0] * 32),
+                "metadata": params.metadata or bytes([0] * 128),
+                "reward": params.reward or 0,
+                "min_stake": params.min_stake or 0,
+                "feed_probation_period": params.feed_probation_period or 0,
+                "oracle_timeout": params.oracle_timeout or 180,
+                "slashing_enabled": params.slashing_enabled or False,
+                "variance_tolerance_multiplier": SwitchboardDecimal.from_decimal(params.variance_tolerance_multiplier or 2),
+                "authority": params.authority,
+                "consecutive_feed_failure_limit": params.consecutive_feed_failure_limit or 1000,
+                "consecutive_oracle_failure_limit": params.consecutive_oracle_failure_limit or 1000,
+                "minimum_delay_seconds": params.minimum_delay_seconds or 5,
+                "queue_size": params.queue_size,
+                "unpermissioned_feeds": params.unpermissioned_feeds or False
+            },
+            ctx=anchorpy.Context(
+                accounts={
+                    "oracle_queue": oracle_queue_account.public_key,
+                    "authority": params.authority,
+                    "buffer": buffer.public_key,
+                    "system_program": system_program.SYS_PROGRAM_ID,
+                    "payer": program.provider.wallet.public_key
+                },
+                signers=[oracle_queue_account, buffer],
+                instructions=[
+                    create_account(
+                        CreateAccountParams(
+                            from_pubkey=program.provider.wallet.public_key, 
+                            new_account_pubkey=buffer.public_key,
+                            lamports=lamports, 
+                            space=queue_size, 
+                            program_id=program.program_id
+                        )
+                    )
+                ]
+            )
+        )
+        return OracleQueueAccount(AccountParams(program=program, keypair=oracle_queue_account));
