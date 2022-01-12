@@ -10,7 +10,6 @@ from spl.token.constants import TOKEN_PROGRAM_ID
 from solana.keypair import Keypair
 from solana.publickey import PublicKey
 
-from switchboardpy.compiled import OracleJob
 from switchboardpy.common import AccountParams
 
 # Devnet Program ID.
@@ -116,8 +115,9 @@ class ProgramStateAccount:
     Returns:
         ProgramStateAccount that was generated
     """
-    async def create(self, program: anchorpy.Program, params: ProgramInitParams):
-        payer_keypair = Keypair.from_secret_key(self.program.provider.wallet.payer.secret_key)
+    @staticmethod
+    async def create(program: anchorpy.Program, params: ProgramInitParams):
+        payer_keypair = Keypair.from_secret_key(program.provider.wallet.payer.secret_key)
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         psa = ProgramStateAccount(AccountParams(program=program, public_key=state_account.public_key))
         try:
