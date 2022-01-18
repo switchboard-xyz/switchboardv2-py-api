@@ -46,12 +46,12 @@ class JobAccount:
 
 
     def __init__(self, params: AccountParams):
-        if params.pubkey is None and params.keypair is None:
+        if params.public_key is None and params.keypair is None:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
-        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+        if params.keypair and params.public_key and params.keypair.public_key != params.public_key:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
         self.program = params.program
-        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.public_key = params.keypair.public_key if params.keypair else params.public_key
         self.keypair = params.keypair
     
     """
