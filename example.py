@@ -27,6 +27,7 @@ async def main():
 
     print('LATEST VALUE:')
     print(val)
+    print(program.type['SwitchboardDecimal'](1, 3))
 
     await program.close()
 

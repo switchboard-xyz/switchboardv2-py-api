@@ -54,6 +54,16 @@ class PermissionAccount:
         keypair (Keypair | None): this permission's keypair
     """
 
+    def __init__(self, params: AccountParams):
+        if params.public_key is None and params.keypair is None:
+            raise ValueError('User must provide either a publicKey or keypair for account use.')
+        if params.keypair and params.public_key and params.keypair.public_key != params.public_key:
+            raise ValueError('User must provide either a publicKey or keypair for account use.')
+        self.program = params.program
+        self.public_key = params.keypair.public_key if params.keypair else params.public_key
+        self.keypair = params.keypair
+    
+
     """
     Check if a specific permission is enabled on this permission account
 
@@ -106,7 +116,8 @@ class PermissionAccount:
     Returns:
         PermissionAccount
     """
-    async def create(self, program: anchorpy.Program, params: PermissionInitParams):
+    @staticmethod
+    async def create(program: anchorpy.Program, params: PermissionInitParams):
         permission_account, permission_bump = PermissionAccount.from_seed(
             program,
             params.authority,
@@ -165,8 +176,18 @@ class PermissionAccount:
     
     Returns:
         TransactionSignature
-
-    TODO: Implement this fn
     """
-    async def set(params: PermissionSetParams):
-        pass
+    async def set(self, params: PermissionSetParams):
+        self.program.rpc["permission_set"](
+            {
+                "permission": self.program.type["SwitchboardPermission"][params.permission](),
+                "authority": params.authority.public_key
+            },
+            ctx=anchorpy.Context(
+                accounts={
+                    "permission": self.public_key,
+                    "authority": params.authority.public_key
+                },
+                signers=[params.authority]
+            )
+        )

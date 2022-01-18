@@ -46,12 +46,12 @@ class JobAccount:
 
 
     def __init__(self, params: AccountParams):
-        if params.pubkey is None and params.keypair is None:
+        if params.public_key is None and params.keypair is None:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
-        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+        if params.keypair and params.public_key and params.keypair.public_key != params.public_key:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
         self.program = params.program
-        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.public_key = params.keypair.public_key if params.keypair else params.public_key
         self.keypair = params.keypair
     
     """
@@ -82,7 +82,7 @@ class JobAccount:
         AccountDoesNotExistError: If the account doesn't exist.
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
-    async def load_data(self):
+    async def load_job(self):
         job = await self.load_job()
         return OracleJob.ParseFromString(job.data)
 
@@ -107,18 +107,20 @@ class JobAccount:
 
     Args:
         program (anchor.Program)
-        prarams (JobInitParams)
+        params (JobInitParams)
 
     Returns:
         JobAccount
     """
-    async def create(self, program: anchorpy.Program, params: JobInitParams):
+    @staticmethod
+    async def create(program: anchorpy.Program, params: JobInitParams):
 
         job_account = params.keypair or Keypair.generate()
         size = 280 + params.data.length + (''.join(params.variables) if params.variables else 0)
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         state = await state_account.load_data()
-        lamports = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        lamports = response["result"]
         await program.rpc["job_init"](
             {
                 "name": params.name or bytes([0] * 32),

@@ -10,7 +10,6 @@ from spl.token.constants import TOKEN_PROGRAM_ID
 from solana.keypair import Keypair
 from solana.publickey import PublicKey
 
-from switchboardpy.compiled import OracleJob
 from switchboardpy.common import AccountParams
 
 # Devnet Program ID.
@@ -43,12 +42,12 @@ class ProgramStateAccount:
 
 
     def __init__(self, params: AccountParams):
-        if params.pubkey is None and params.keypair is None:
+        if params.public_key is None and params.keypair is None:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
-        if params.keypair and params.pubkey and params.keypair.public_key != params.pubkey:
+        if params.keypair and params.public_key and params.keypair.public_key != params.public_key:
             raise ValueError('User must provide either a publicKey or keypair for account use.')
         self.program = params.program
-        self.public_key = params.keypair.public_key if params.keypair else params.pubkey
+        self.public_key = params.keypair.public_key if params.keypair else params.public_key
         self.keypair = params.keypair
     
     """
@@ -116,8 +115,9 @@ class ProgramStateAccount:
     Returns:
         ProgramStateAccount that was generated
     """
-    async def create(self, program: anchorpy.Program, params: ProgramInitParams):
-        payer_keypair = Keypair.from_secret_key(self.program.provider.wallet.payer.secret_key)
+    @staticmethod
+    async def create(program: anchorpy.Program, params: ProgramInitParams):
+        payer_keypair = Keypair.from_secret_key(program.provider.wallet.payer.secret_key)
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         psa = ProgramStateAccount(AccountParams(program=program, public_key=state_account.public_key))
         try:
