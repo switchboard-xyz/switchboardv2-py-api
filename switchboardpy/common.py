@@ -1,6 +1,7 @@
 import anchorpy
 
 from dataclasses import dataclass
+from functools import reduce
 from typing import Any
 from decimal import Decimal
 from solana.publickey import PublicKey
@@ -55,7 +56,9 @@ class SwitchboardDecimal:
 
     @staticmethod
     def from_decimal(dec: Decimal):
-        pass
+        _, digits, exponent = dec.as_tuple()
+        integer = reduce(lambda rst, x: rst * 10 + x, digits)
+        return SwitchboardDecimal(integer, exponent)
 
     # convert any switchboard-decimal-like object to a decimal
     @staticmethod
@@ -63,6 +66,10 @@ class SwitchboardDecimal:
         mantissa = Decimal(sbd.mantissa)
         scale = sbd.scale
         return mantissa / Decimal(10 ** scale)
+
+    # for sending as argument in transaction
+    def as_proper_sbd(self, program: anchorpy.Program):
+        return program.type['SwitchboardDecimal'](self.mantissa, self.scale)
 
     def __eq__(self, __o: object) -> bool:
         if not (hasattr(__o, 'mantissa') and hasattr(__o, 'scale')):

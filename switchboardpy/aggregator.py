@@ -274,7 +274,7 @@ class AggregatorAccount:
         for i in range(13, buffer.length, ROW_SIZE):
             if i + ROW_SIZE > buffer.length:
                 break
-            row = AggregatorHistoryRow.fromBuffer(buffer)
+            row = AggregatorHistoryRow.from_buffer(buffer)
             if row.timestamp == 0:
                 break
             if i <= insert_idx:
@@ -375,7 +375,7 @@ class AggregatorAccount:
         for i in range(aggregator.oracle_request_batch_size):
             if aggregator.latest_confirmed_round.medians_filfilled[i]:
                 results.append({
-                    "oracle_account": OracleAccount(self.program, aggregator.latest_confirmed_round.oracle_pubkeys_data[i]),
+                    "oracle_account": OracleAccount(AccountParams(program=self.program, public_key=aggregator.latest_confirmed_round.oracle_pubkeys_data[i])),
                     "value": SwitchboardDecimal.sbd_to_decimal(aggregator.latest_confirmed_round.medians_data[i])
                 })
         return results
@@ -484,7 +484,7 @@ class AggregatorAccount:
                 "batch_size": aggregator_init_params.batch_size,
                 "min_oracle_results": aggregator_init_params.min_required_oracle_results,
                 "min_job_results": aggregator_init_params.min_required_job_results,
-                "variance_threshold": aggregator_init_params.variance_threshold or 0,
+                "variance_threshold": SwitchboardDecimal.from_decimal(aggregator_init_params.variance_threshold).as_proper_sbd(program) if aggregator_init_params.variance_threshold else 0,
                 "force_report_period": aggregator_init_params.force_report_period or 0,
                 "expiration": aggregator_init_params.expiration or 0,
                 "state_bump": state_bump
@@ -531,10 +531,9 @@ class AggregatorAccount:
         INSERT_IDX_SIZE = 4
         DISCRIMINATOR_SIZE = 8
         size = params.size * HISTORY_ROW_SIZE + INSERT_IDX_SIZE + DISCRIMINATOR_SIZE
-        lamports = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
-
+        response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
+        lamports = response["result"]
         await program.rpc["aggregator_set_history_buffer"](
-            {},
             ctx=anchorpy.Context(
                 accounts={
                     "aggregator": self.public_key,
@@ -729,10 +728,10 @@ class AggregatorAccount:
             {
                 "oracle_idx": params.oracle_idx,
                 "error": params.error,
-                "value": SwitchboardDecimal.from_decimal(params.value), # @FIXME - verify that this decimal approach is correct (it very well might not be)
+                "value": SwitchboardDecimal.from_decimal(params.value).as_proper_sbd(self.program),
                 "jobs_checksum": digest,
-                "min_response": SwitchboardDecimal.from_decimal(params.min_response), # @FIXME
-                "max_response": SwitchboardDecimal.from_decimal(params.max_response), # @FIXME 
+                "min_response": SwitchboardDecimal.from_decimal(params.min_response).as_proper_sbd(self.program),
+                "max_response": SwitchboardDecimal.from_decimal(params.max_response).as_proper_sbd(self.program),
                 "feed_permission_bump": feed_permission_bump,
                 "oracle_permission_bump": oracle_permission_bump,
                 "lease_bump": lease_bump,
