@@ -61,7 +61,7 @@ class ProgramStateAccount:
     """
     @staticmethod
     def from_seed(program: anchorpy.Program):
-        state_pubkey, state_bump = publickey.PublicKey.find_program_address(bytes('STATE'), program.program_id)
+        state_pubkey, state_bump = publickey.PublicKey.find_program_address([bytes(b'STATE')], program.program_id)
         return ProgramStateAccount(AccountParams(program=program, public_key=state_pubkey)), state_bump
 
     """

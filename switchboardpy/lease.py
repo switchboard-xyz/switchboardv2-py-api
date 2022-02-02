@@ -132,7 +132,7 @@ class LeaseAccount:
     def from_seed(program: anchorpy.Program, queue_account: OracleQueueAccount, aggregator_account: AggregatorAccount):
         pubkey, bump = publickey.PublicKey.find_program_address(
             [
-                bytes('LeaseAccountData'), 
+                bytes(b'LeaseAccountData'), 
                 bytes(queue_account.public_key),
                 bytes(aggregator_account.public_key),
             ],

@@ -158,7 +158,7 @@ class PermissionAccount:
     def from_seed(program: anchorpy.Program, authority: PublicKey, granter: PublicKey, grantee: PublicKey):
         pubkey, bump = PublicKey.find_program_address(
             [
-                bytes('PermissionAccountData'), 
+                bytes(b'PermissionAccountData'), 
                 bytes(authority),
                 bytes(granter),
                 bytes(grantee)

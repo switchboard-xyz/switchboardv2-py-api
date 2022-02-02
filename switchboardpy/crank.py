@@ -167,7 +167,7 @@ class CrankAccount:
                     "payer": program.provider.wallet.public_key
                 },
                 signers=[crank_account, buffer],
-                instructions=[
+                pre_instructions=[
                     create_account(
                         CreateAccountParams(
                             from_pubkey=program.provider.wallet.public_key, 

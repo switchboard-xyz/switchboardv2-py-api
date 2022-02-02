@@ -10,6 +10,7 @@ from switchboardpy import (
   AccountParams,
   AggregatorSaveResultParams,
   AggregatorSetHistoryBufferParams,
+  OracleQueueAccount
 )
 
 from contextlib import contextmanager
@@ -23,7 +24,7 @@ class SwitchboardProgram(object):
 
     async def __aenter__(self):
       client = AsyncClient("https://api.devnet.solana.com/")
-      provider = Provider(client, Wallet(Keypair()))
+      provider = Provider(client, Wallet.local()) # 2RBU9Eie9GpBe8kY81Vo3zHwnXMBbcvh8bnb6f9CLzts
       self.program = await Program.at(
           SBV2_DEVNET_PID, provider
       )
@@ -58,3 +59,36 @@ async def test_get_latest_value():
 
         print('LATEST VALUE:')
         print(val)
+
+@mark.asyncio
+async def test_get_latest_value():
+    async with SwitchboardProgram() as program:
+        agg = AggregatorAccount(AccountParams(program=program, public_key=PublicKey("88FX4tBstuwBPNhQU4EEBoPX35neSu4Le9zDSwtPRRQz")))
+
+        # getting most recent value
+        val = await agg.get_latest_feed_timestamp()
+        assert Decimal('1639722030') == val
+        print('LATEST TIMESTAMP:')
+        print(val)
+
+@mark.asyncio
+async def test_create():
+    async with SwitchboardProgram() as program:
+        """
+        aggregator = await AggregatorAccount.create(
+            program=program, 
+            aggregator_init_params=AggregatorInitParams(
+                batch_size=3, 
+                min_required_oracle_results=2, 
+                min_required_job_results=1, 
+                min_update_delay_seconds=300, 
+                queue_account=OracleQueueAccount(
+                    AccountParams(
+                        program=program, 
+                        public_key=PublicKey("F8ce7MsckeZAbAGmxjJNetxYXQa9mKr9nnrC3qKubyYy")
+                    )
+                ),
+                start_after=0,
+            )
+        )
+        """

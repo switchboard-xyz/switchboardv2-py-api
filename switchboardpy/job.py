@@ -116,7 +116,7 @@ class JobAccount:
     async def create(program: anchorpy.Program, params: JobInitParams):
 
         job_account = params.keypair or Keypair.generate()
-        size = 280 + params.data.length + (''.join(params.variables) if params.variables else 0)
+        size = 280 + len(params.data) + (''.join(params.variables) if params.variables else 0)
         state_account, state_bump = ProgramStateAccount.from_seed(program)
         state = await state_account.load_data()
         response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
@@ -126,7 +126,7 @@ class JobAccount:
                 "name": params.name or bytes([0] * 32),
                 "expiration": params.expiration or 0,
                 "data": params.data,
-                "variables": [bytes('') for _ in params.variables] if params.variables else [],
+                "variables": [bytes(b'') for _ in params.variables] if params.variables else [],
                 "state_bump": state_bump
             },
             ctx=anchorpy.Context(
@@ -136,7 +136,7 @@ class JobAccount:
                     "program_state": state_account.public_key
                 },
                 signers=[job_account],
-                instructions=[
+                pre_instructions=[
                     create_account(
                         CreateAccountParams(
                             from_pubkey=program.provider.wallet.public_key, 

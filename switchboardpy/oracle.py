@@ -104,7 +104,7 @@ class OracleAccount:
     def from_seed(program: anchorpy.Program, queue_account: OracleQueueAccount, wallet: PublicKey):
         oracle_pubkey, bump = PublicKey.find_program_address(
             [
-                bytes('OracleAccountData'), 
+                bytes(b'OracleAccountData'), 
                 bytes(queue_account.public_key),
                 bytes(wallet),
             ],

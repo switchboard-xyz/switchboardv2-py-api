@@ -2,11 +2,11 @@ import asyncio
 from pytest import fixture, mark
 
 from switchboardpy import (
-  SBV2_DEVNET_PID,
-  AccountParams,
-  JobAccount,
-  JobInitParams,
-  OracleJob,
+    SBV2_DEVNET_PID,
+    AccountParams,
+    JobAccount,
+    JobInitParams,
+    OracleJob,
 )
 
 from contextlib import contextmanager
@@ -19,12 +19,12 @@ from anchorpy import Program, Provider, Wallet
 class SwitchboardProgram(object):
 
     async def __aenter__(self):
-      client = AsyncClient("https://api.devnet.solana.com/")
-      provider = Provider(client, Wallet(Keypair()))
-      self.program = await Program.at(
-          SBV2_DEVNET_PID, provider
-      )
-      return self.program
+        client = AsyncClient("https://api.devnet.solana.com/")
+        provider = Provider(client, Wallet.local())
+        self.program = await Program.at(
+            SBV2_DEVNET_PID, provider
+        )
+        return self.program
     
     async def __aexit__(self, exc_t, exc_v, exc_tb):
         await self.program.close()
@@ -38,3 +38,24 @@ async def test_load_data():
         # getting aggregator data
         data = await job.load_data()
         print(data)
+
+@mark.asyncio
+async def test_create():
+    async with SwitchboardProgram() as program:
+        oracleJob = OracleJob()
+        task1 = oracleJob.tasks.add()
+        httpTask = OracleJob.HttpTask()
+        httpTask.url = "https://ftx.us/api/markets/sol/usd"
+        task1.http_task.CopyFrom(httpTask)
+        task2 = oracleJob.tasks.add()
+        parseTask = OracleJob.JsonParseTask()
+        parseTask.path = "$.result.price"
+        task2.json_parse_task.CopyFrom(parseTask)
+
+        print(oracleJob.tasks)
+        job = await JobAccount.create(
+            program=program, 
+            params=JobInitParams(
+              data=bytearray(oracleJob.SerializeToString())
+            )
+        )

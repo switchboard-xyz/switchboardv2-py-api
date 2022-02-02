@@ -165,7 +165,7 @@ class OracleQueueAccount:
                     "payer": program.provider.wallet.public_key
                 },
                 signers=[oracle_queue_account, buffer],
-                instructions=[
+                pre_instructions=[
                     create_account(
                         CreateAccountParams(
                             from_pubkey=program.provider.wallet.public_key, 

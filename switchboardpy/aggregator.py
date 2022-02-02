@@ -86,7 +86,7 @@ class AggregatorOpenRoundParams:
 
 # Init Params for Aggregators
 @dataclass
-class AggregatorInitParams(NamedTuple):
+class AggregatorInitParams:
     """Number of oracles to request on aggregator update."""
     batch_size: int
 
@@ -196,7 +196,7 @@ class AggregatorAccount:
         self.program = params.program
         self.public_key = params.keypair.public_key if params.keypair else params.public_key
         self.keypair = params.keypair
-        
+    
 
     """
     Get name of an aggregator.
@@ -318,7 +318,7 @@ class AggregatorAccount:
         AccountDoesNotExistError: If the account doesn't exist.
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
-    async def get_latest_feed_timestamp(self, aggregator: Any) -> Decimal:
+    async def get_latest_feed_timestamp(self, aggregator: Optional[Any] = None) -> Decimal:
         aggregator = aggregator if aggregator else await self.load_data()
         if hasattr(aggregator, 'latest_confirmed_round') and aggregator.latest_confirmed_round.num_success == 0:
             raise ValueError('Aggregator currently holds no value.')
@@ -336,7 +336,7 @@ class AggregatorAccount:
         name string of the aggregator
     """
     @staticmethod
-    def should_report_value(value: Decimal, aggregator: Any) -> bool:
+    def should_report_value(value: Decimal, aggregator: Optional[Any] = None) -> bool:
         if aggregator.latestConfirmedRound and aggregator.latest_confirmed_round.num_success == 0:
             return True
         timestamp = round(int(time.time()) / 1000)
@@ -366,7 +366,7 @@ class AggregatorAccount:
     Raises:
         ValueError: If aggregator currently holds no value.
     """
-    async def get_confirmed_round_results(self, aggregator: Any) -> Decimal:
+    async def get_confirmed_round_results(self, aggregator: Optional[Any] = None) -> Decimal:
         
         aggregator = aggregator if aggregator else await self.load_data()
         if hasattr(aggregator, 'latest_confirmed_round') and aggregator.latest_confirmed_round.num_success == 0:
@@ -415,7 +415,7 @@ class AggregatorAccount:
         AccountDoesNotExistError: If the account doesn't exist.
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
-    async def load_jobs(self, aggregator: Any) -> Decimal:
+    async def load_jobs(self, aggregator: Optional[Any] = None) -> Decimal:
         coder = anchorpy.AccountsCoder(self.program.idl);
         aggregator = aggregator if aggregator else await self.load_data()
         job_accounts_raw = await anchorpy.utils.rpc.get_multiple_accounts(self.program.provider, aggregator.job_pubkeys_data)[:aggregator.job_pubkeys_size]
@@ -438,7 +438,7 @@ class AggregatorAccount:
         AccountDoesNotExistError: If the account doesn't exist.
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
-    async def load_hashes(self, aggregator: Any) -> Decimal:
+    async def load_hashes(self, aggregator: Optional[Any] = None) -> Decimal:
         coder = anchorpy.AccountsCoder(self.program.idl);
         aggregator = aggregator if aggregator else await self.loadData()
         job_accounts_raw = await anchorpy.utils.rpc.get_multiple_accounts(self.program.provider, aggregator.job_pubkeys_data)[:aggregator.job_pubkeys_size]
@@ -477,6 +477,8 @@ class AggregatorAccount:
         state = await state_account.load_data()
         response = await program.provider.connection.get_minimum_balance_for_rent_exemption(size)
         lamports = response["result"]
+        zero_decimal = program.type['SwitchboardDecimal'](0, 0)
+
         await program.rpc["aggregator_init"](
             {
                 "name": aggregator_init_params.name or bytes([0] * 32),
@@ -484,10 +486,12 @@ class AggregatorAccount:
                 "batch_size": aggregator_init_params.batch_size,
                 "min_oracle_results": aggregator_init_params.min_required_oracle_results,
                 "min_job_results": aggregator_init_params.min_required_job_results,
-                "variance_threshold": SwitchboardDecimal.from_decimal(aggregator_init_params.variance_threshold).as_proper_sbd(program) if aggregator_init_params.variance_threshold else 0,
+                "min_update_delay_seconds": aggregator_init_params.min_update_delay_seconds,
+                "variance_threshold": SwitchboardDecimal.from_decimal(aggregator_init_params.variance_threshold).as_proper_sbd(program) if aggregator_init_params.variance_threshold else zero_decimal,
                 "force_report_period": aggregator_init_params.force_report_period or 0,
                 "expiration": aggregator_init_params.expiration or 0,
-                "state_bump": state_bump
+                "state_bump": state_bump,
+                "start_after": aggregator_init_params.start_after,
             },
             ctx=anchorpy.Context(
                 accounts={
@@ -498,7 +502,7 @@ class AggregatorAccount:
                     "program_state": state_account.public_key
                 },
                 signers=[aggregator_account],
-                instructions=[
+                pre_instructions=[
                     create_account(
                         CreateAccountParams(
                             from_pubkey=program.provider.wallet.public_key, 
@@ -541,7 +545,7 @@ class AggregatorAccount:
                     "buffer": buffer.public_key
                 },
                 signers=[authority, buffer],
-                instructions=[
+                pre_instructions=[
                     create_account(
                         CreateAccountParams(
                             from_pubkey=program.provider.wallet.public_key,

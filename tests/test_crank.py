@@ -9,6 +9,7 @@ from switchboardpy import (
   CrankPushParams,
   CrankInitParams,
   CrankRow,
+  OracleQueueAccount
 )
 
 from contextlib import contextmanager
@@ -24,7 +25,7 @@ class SwitchboardProgram(object):
 
     async def __aenter__(self):
       client = AsyncClient("https://api.devnet.solana.com/")
-      provider = Provider(client, Wallet(Keypair()))
+      provider = Provider(client, Wallet.local()) # 2RBU9Eie9GpBe8kY81Vo3zHwnXMBbcvh8bnb6f9CLzts
       self.program = await Program.at(
           SBV2_DEVNET_PID, provider
       )
@@ -42,3 +43,18 @@ async def test_load_data():
         # getting aggregator data
         data = await crank.load_data()
         print(data)
+
+@mark.asyncio
+async def test_create():
+    async with SwitchboardProgram() as program:
+        crank = await CrankAccount.create(
+            program=program, 
+            params=CrankInitParams(
+                queue_account=OracleQueueAccount(
+                    AccountParams(
+                        program=program, 
+                        public_key=PublicKey("F8ce7MsckeZAbAGmxjJNetxYXQa9mKr9nnrC3qKubyYy")
+                    )
+                ),
+            )
+        )
