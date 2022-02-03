@@ -416,7 +416,7 @@ class AggregatorAccount:
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
     async def load_jobs(self, aggregator: Optional[Any] = None) -> Decimal:
-        coder = anchorpy.AccountsCoder(self.program.idl);
+        coder = anchorpy.AccountsCoder(self.program.idl)
         aggregator = aggregator if aggregator else await self.load_data()
         job_accounts_raw = await anchorpy.utils.rpc.get_multiple_accounts(self.program.provider, aggregator.job_pubkeys_data)[:aggregator.job_pubkeys_size]
         if not job_accounts_raw:
@@ -439,7 +439,7 @@ class AggregatorAccount:
         AccountInvalidDiscriminator: If the discriminator doesn't match the IDL.
     """
     async def load_hashes(self, aggregator: Optional[Any] = None) -> Decimal:
-        coder = anchorpy.AccountsCoder(self.program.idl);
+        coder = anchorpy.AccountsCoder(self.program.idl)
         aggregator = aggregator if aggregator else await self.loadData()
         job_accounts_raw = await anchorpy.utils.rpc.get_multiple_accounts(self.program.provider, aggregator.job_pubkeys_data)[:aggregator.job_pubkeys_size]
         if not job_accounts_raw:
@@ -570,7 +570,11 @@ class AggregatorAccount:
     """
     async def add_job(self, job: JobAccount, authority: Optional[Keypair] = None) -> TransactionSignature:
         authority = authority or self.keypair
+        
         return await self.program.rpc['aggregator_add_job'](
+            {
+                "params": None
+            },
             ctx=anchorpy.Context(
                 accounts={
                     "aggregator": self.public_key,

@@ -15,6 +15,7 @@ from solana.keypair import Keypair
 from solana.publickey import PublicKey
 from solana.rpc.async_api import AsyncClient
 from anchorpy import Program, Provider, Wallet
+from google.protobuf.internal import encoder
 
 class SwitchboardProgram(object):
 
@@ -42,6 +43,8 @@ async def test_load_data():
 @mark.asyncio
 async def test_create():
     async with SwitchboardProgram() as program:
+
+        # Jobs protobuf needs to be delimited
         oracleJob = OracleJob()
         task1 = oracleJob.tasks.add()
         httpTask = OracleJob.HttpTask()
@@ -52,10 +55,15 @@ async def test_create():
         parseTask.path = "$.result.price"
         task2.json_parse_task.CopyFrom(parseTask)
 
+        serializedMessage = oracleJob.SerializeToString()
+        delimiter = encoder._VarintBytes(len(serializedMessage))
+
+        delimitedOJ = delimiter + serializedMessage
+
         print(oracleJob.tasks)
         job = await JobAccount.create(
             program=program, 
             params=JobInitParams(
-              data=bytearray(oracleJob.SerializeToString())
+              data=delimitedOJ
             )
         )

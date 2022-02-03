@@ -61,7 +61,7 @@ class ProgramStateAccount:
     """
     @staticmethod
     def from_seed(program: anchorpy.Program):
-        state_pubkey, state_bump = publickey.PublicKey.find_program_address([bytes(b'STATE')], program.program_id)
+        state_pubkey, state_bump = publickey.PublicKey.find_program_address(['STATE'.encode()], program.program_id)
         return ProgramStateAccount(AccountParams(program=program, public_key=state_pubkey)), state_bump
 
     """
@@ -93,7 +93,7 @@ class ProgramStateAccount:
     async def get_token_mint(self) -> AsyncToken:
         payer_keypair = Keypair.from_secret_key(self.program.provider.wallet.payer.secret_key)
         state = await self.load_data()
-        switch_token_mint = AsyncToken(self.program.provider.connection, state.token_mint, TOKEN_PROGRAM_ID)
+        switch_token_mint = AsyncToken(self.program.provider.connection, state.token_mint, TOKEN_PROGRAM_ID, payer_keypair)
         return switch_token_mint
 
     """

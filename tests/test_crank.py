@@ -47,6 +47,7 @@ async def test_load_data():
 @mark.asyncio
 async def test_create():
     async with SwitchboardProgram() as program:
+        """
         crank = await CrankAccount.create(
             program=program, 
             params=CrankInitParams(
@@ -58,3 +59,4 @@ async def test_create():
                 ),
             )
         )
+        """

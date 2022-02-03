@@ -14,10 +14,10 @@ from spl.token.instructions import get_associated_token_address
 
 from switchboardpy.oraclequeue import OracleQueueAccount
 from switchboardpy.common import AccountParams
+from switchboardpy.program import ProgramStateAccount
 
 if TYPE_CHECKING:
     from switchboardpy.aggregator import AggregatorAccount
-    from switchboardpy.program import ProgramStateAccount
 
 
 # Parameters for initializing a LeaseAccount
@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 class LeaseInitParams:
 
     """Token amount to load into the lease escrow"""
-    load_amount: Decimal
+    load_amount: int
 
     """The funding wallet of the lease"""
     funder: PublicKey
@@ -47,7 +47,7 @@ class LeaseInitParams:
 class LeaseExtendParams:
 
     """Token amount to load into the lease escrow"""
-    load_amount: Decimal
+    load_amount: int
 
     """The funding wallet of the lease"""
     funder: PublicKey
@@ -60,7 +60,7 @@ class LeaseExtendParams:
 class LeaseWithdrawParams:
 
     """Token amount to withdraw from the lease escrow"""
-    amount: Decimal
+    amount: int
 
     """The wallet of to withdraw to"""
     withdraw_wallet: PublicKey
@@ -160,15 +160,8 @@ class LeaseAccount:
             params.oracle_queue_account,
             params.aggregator_account
         )
-        escrow = get_associated_token_address(
-            lease_account.public_key,
-            switch_token_mint.program_id
-        )
-
-        try:
-            await switch_token_mint.create_associated_token_account(lease_account.public_key)
-        except Exception:
-            pass
+     
+        escrow = await switch_token_mint.create_associated_token_account(lease_account.public_key, skip_confirmation=False)
         await program.rpc["lease_init"](
             {
                 "load_amount": params.load_amount,
