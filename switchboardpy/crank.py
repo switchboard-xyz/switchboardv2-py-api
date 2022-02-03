@@ -27,7 +27,7 @@ class CrankInitParams:
     queue_account: OracleQueueAccount
 
     """Buffer specifying crank name"""
-    names: bytes = None
+    name: bytes = None
 
     """Buffer specifying crank metadata"""
     metadata: bytes = None
@@ -160,7 +160,7 @@ class CrankAccount:
             },
             ctx=anchorpy.Context(
                 accounts={
-                    "crank": params.public_key,
+                    "crank": crank_account.public_key,
                     "queue": params.queue_account.public_key,
                     "buffer": buffer.public_key,
                     "system_program": system_program.SYS_PROGRAM_ID,

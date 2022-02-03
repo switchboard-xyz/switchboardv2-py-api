@@ -124,7 +124,8 @@ class PermissionAccount:
             params.granter,
             params.grantee
         )
-        await program.rpc["job_init"](
+
+        await program.rpc["permission_init"](
             {
                 "permission_bump": permission_bump
             },
@@ -137,10 +138,9 @@ class PermissionAccount:
                     "system_program": system_program.SYS_PROGRAM_ID,
                     "payer": program.provider.wallet.public_key
                 },
-                signers=[permission_account.keypair],
             )
         )
-        return PermissionAccount(AccountParams(program=program, keypair=permission_account))
+        return permission_account
 
     """
     Loads a PermissionAccount from the expected PDA seed format
