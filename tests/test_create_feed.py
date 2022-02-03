@@ -72,7 +72,7 @@ async def test_create():
                 batch_size=3, 
                 min_required_oracle_results=2, 
                 min_required_job_results=1, 
-                min_update_delay_seconds=300, 
+                min_update_delay_seconds=6, 
                 queue_account=OracleQueueAccount(
                     AccountParams(
                         program=program, 
@@ -126,7 +126,7 @@ async def test_create():
             TOKEN_PROGRAM_ID, 
             program.provider.wallet.public_key, 
             program.provider.wallet.payer, 
-            50000, # load with 50000 lamps
+            1_000_000,
             skip_confirmation=False
         )
         
@@ -135,7 +135,7 @@ async def test_create():
             program=program, 
             params=LeaseInitParams(
                 withdraw_authority=program.provider.wallet.public_key,
-                load_amount=10, 
+                load_amount=1_000_000, 
                 funder=tokenAccount,
                 funder_authority=program.provider.wallet.payer,
                 aggregator_account=aggregator,
