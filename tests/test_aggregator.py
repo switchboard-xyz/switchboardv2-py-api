@@ -74,8 +74,7 @@ async def test_get_latest_value():
 @mark.asyncio
 async def test_create():
     async with SwitchboardProgram() as program:
-        """
-        aggregator = await AggregatorAccount.create(
+        await AggregatorAccount.create(
             program=program, 
             aggregator_init_params=AggregatorInitParams(
                 batch_size=3, 
@@ -91,4 +90,3 @@ async def test_create():
                 start_after=0,
             )
         )
-        """

@@ -17,10 +17,10 @@ from switchboardpy.common import AccountParams
 class OracleQueueInitParams:
 
     """Rewards to provide oracles and round openers on this queue."""
-    reward: Decimal
+    reward: int
 
     """The minimum amount of stake oracles must present to remain on the queue."""
-    min_stake: Decimal
+    min_stake: int
 
     """
     The account to delegate authority to for creating permissions targeted
@@ -37,7 +37,7 @@ class OracleQueueInitParams:
     slashBound = varianceToleranceMultiplier * stdDeviation
     Default: 2
     """
-    variance_tolerance_multiplier: float = None
+    variance_tolerance_multiplier: Decimal = None
 
     """Consecutive failure limit for a feed before feed permission is revoked."""
     consecutive_feed_failure_limit: int = None
@@ -142,18 +142,18 @@ class OracleQueueAccount:
         await program.rpc["oracle_queue_init"](
             {
                 "name": params.name or bytes([0] * 32),
-                "metadata": params.metadata or bytes([0] * 128),
+                "metadata": params.metadata or bytes([0] * 64),
                 "reward": params.reward or 0,
                 "min_stake": params.min_stake or 0,
                 "feed_probation_period": params.feed_probation_period or 0,
                 "oracle_timeout": params.oracle_timeout or 180,
                 "slashing_enabled": params.slashing_enabled or False,
-                "variance_tolerance_multiplier": SwitchboardDecimal.from_decimal(params.variance_tolerance_multiplier or 2),
+                "variance_tolerance_multiplier": SwitchboardDecimal.from_decimal(params.variance_tolerance_multiplier or Decimal(2)).as_proper_sbd(program),
                 "authority": params.authority,
                 "consecutive_feed_failure_limit": params.consecutive_feed_failure_limit or 1000,
                 "consecutive_oracle_failure_limit": params.consecutive_oracle_failure_limit or 1000,
                 "minimum_delay_seconds": params.minimum_delay_seconds or 5,
-                "queue_size": params.queue_size,
+                "queue_size": params.queue_size or 0,
                 "unpermissioned_feeds": params.unpermissioned_feeds or False
             },
             ctx=anchorpy.Context(

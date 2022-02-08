@@ -22,7 +22,7 @@ class SwitchboardProgram(object):
 
     async def __aenter__(self):
       client = AsyncClient("https://api.devnet.solana.com/")
-      provider = Provider(client, Wallet(Keypair()))
+      provider = Provider(client, Wallet.local())
       self.program = await Program.at(
           SBV2_DEVNET_PID, provider
       )
@@ -41,3 +41,15 @@ async def test_load_data():
         data = await queue.load_data()
         print(data)
         
+@mark.asyncio
+async def test_create():
+    async with SwitchboardProgram() as program:
+        await OracleQueueAccount.create(
+            program=program, 
+            params=OracleQueueInitParams(
+                reward=3000,
+                min_stake=300, 
+                authority=program.provider.wallet.public_key, #
+                oracle_timeout=20000, 
+            )
+        )
